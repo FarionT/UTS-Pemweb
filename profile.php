@@ -148,7 +148,7 @@ else if($_SESSION['user_role'] == "admin") {
                         <p class="mt-3 mb-0">Username: <?= $row['username'] ?></p>
                         <p class="mb-0" >Email: <?= $row['email'] ?></p>
                         <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
-                        <a href="#" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
+                        <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
                     <?php
                     }
                     ?>
