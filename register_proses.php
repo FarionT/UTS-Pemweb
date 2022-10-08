@@ -13,6 +13,7 @@ $pekerjaan = $_POST['pekerjaan'];
 $email = $_POST['email'];
 $tanggallahir = $_POST['tanggallahir'];
 $password = $_POST['password'];
+$role = "user";
 
 if(isset($_FILES['profile']) && !empty($_FILES['profile'])) {
     $filename = $_FILES['profile']['name'];
@@ -46,20 +47,20 @@ else {
 $en_pass = password_hash($password, PASSWORD_BCRYPT);
 
 if(isset($namabelakang) && !empty($namabelakang)) {
-    $sql = "INSERT INTO user (username, password, namadepan, namabelakang, pekerjaan, email, tanggallahir, profile)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (username, password, namadepan, namabelakang, pekerjaan, email, tanggallahir, role, profile)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 }
 else {
-    $sql = "INSERT INTO user (username, password, namadepan, namabelakang, pekerjaan, email, tanggallahir, profile)
-        VALUES(?, ?, ?, NULL, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (username, password, namadepan, namabelakang, pekerjaan, email, tanggallahir, role, profile)
+        VALUES(?, ?, ?, NULL, ?, ?, ?, ?, ?)";
 }
 
 $result = $db->prepare($sql);
 if(isset($namabelakang) && !empty($namabelakang)) {
-    $result->execute([$username, $en_pass, $namadepan, $namabelakang, $pekerjaan, $email, $tanggallahir, $profile]);
+    $result->execute([$username, $en_pass, $namadepan, $namabelakang, $pekerjaan, $email, $tanggallahir, $role, $profile]);
 }
 else {
-    $result->execute([$username, $en_pass, $namadepan, $pekerjaan, $email, $tanggallahir, $profile]);
+    $result->execute([$username, $en_pass, $namadepan, $pekerjaan, $email, $tanggallahir, $role, $profile]);
 }
 
 

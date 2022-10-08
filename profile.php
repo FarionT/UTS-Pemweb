@@ -1,9 +1,17 @@
 <?php
 session_start();
 require('db.php');
-if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") {
     $username = $_SESSION['username'];
     $sql = "SELECT * FROM user WHERE username = ?";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$username]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+else if($_SESSION['user_role'] == "admin") {
+    $username = $_SESSION['username'];
+    $sql = "SELECT * FROM admin WHERE username = ?";
 
     $stmt = $db->prepare($sql);
     $stmt->execute([$username]);
@@ -35,10 +43,18 @@ if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
             <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
             <?php
-            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
+            if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") { 
                 $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
                 $result = $db->query($sqlprofile);
-                $row = $result->fetch(PDO::FETCH_ASSOC)
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+            ?>
+                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+            <?php
+            } else if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "admin") {
+                $sqlprofile = "SELECT * FROM admin WHERE id = {$_SESSION['user_id']}";
+                $result = $db->query($sqlprofile);
+                $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
                 <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
                 <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
@@ -58,16 +74,23 @@ if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
 
             <div class="d-inline-block">
                 <?php
-                if($row['namabelakang'] == NULL) {?>
-                    <h4><?= $row['namadepan'] ?></h4>
+                if($_SESSION['user_role'] == "user") {
+                    if($row['namabelakang'] == NULL) {?>
+                        <h4><?= $row['namadepan'] ?></h4>
+                        <?php
+                    } else {
+                        ?>
+                        <h4><?= $row['namadepan'] . ' ' . $row['namabelakang']?></h4>    
+                        <?php
+                    }
+                    ?>
+                    <p><?= $row['pekerjaan'] ?></p>
                 <?php
-                } else {
-                ?>
-                    <h4><?= $row['namadepan'] . ' ' . $row['namabelakang']?></h4>    
+                } else if($_SESSION['user_role'] == "admin") { ?>
+                    <h2 class="ms-5">Admin</h2>
                 <?php
                 }
                 ?>
-                <p><?= $row['pekerjaan'] ?></p>
             </div>
         </div>
         <div class="d-flex justify-content-around">
@@ -112,11 +135,15 @@ if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                     <p>1</p>
                 </div>
                 <br/>
-                <div class="bg-white text-center d-inline-block" style="width:100%">
-                    <p class="mt-3 mb-0">Username: <?= $row['username'] ?></p>
-                    <p class="mb-0" >Email: <?= $row['email'] ?></p>
-                    <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
-                    <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
+                <div class="bg-white text-center d-inline-block pt-2" style="width:100%">
+                    <?php if($_SESSION['user_role'] == "user") { ?>
+                        <p class="mt-3 mb-0">Username: <?= $row['username'] ?></p>
+                        <p class="mb-0" >Email: <?= $row['email'] ?></p>
+                        <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
+                        <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
+                    <?php
+                    }
+                    ?>
                     <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
                 </div>
             </div>
