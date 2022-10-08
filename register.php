@@ -32,7 +32,7 @@ session_start();
     <div class="container">
         <div class="d-flex justify-content-around mt-5">
             <div class="w-50">
-                <img style="height: 100px;" src="img/logo-yellow.png" />
+                <img style="height: 100px;" src="img/logo.png" />
                 <p style="width: 58%">Ngoding coy merupakan website yang
                     dikembangkan sebagai forum bagi para programmer                
                     untuk saling berdiskusi serta berbagi pengetahuan
