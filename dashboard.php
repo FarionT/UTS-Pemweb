@@ -13,8 +13,8 @@ require('db.php');
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <title>NgodingCoy</title>
 </head>
-<body>
-    <nav class="shadow w-100 d-flex justify-content-between py-2">
+<body style="background-color: #D9D9D9;">
+    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
@@ -28,10 +28,18 @@ require('db.php');
             <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
             <?php
-            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
+            if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") { 
                 $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
                 $result = $db->query($sqlprofile);
-                $row = $result->fetch(PDO::FETCH_ASSOC)
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+            ?>
+                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+            <?php
+            } else if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "admin") {
+                $sqlprofile = "SELECT * FROM admin WHERE id = {$_SESSION['user_id']}";
+                $result = $db->query($sqlprofile);
+                $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
                 <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
                 <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
@@ -44,7 +52,28 @@ require('db.php');
             ?>
         </div>
     </nav>
-    DASHBOARD CUY
+    <div class="container">
+        <div class="container col-6" style="background-color:white;margin-top:10px;">      
+            <div class="mx-auto">
+                <img src="img/farion.png" style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                <div class="d-inline-block align-middle ">
+                    <a href="#" class="fs-3">farion 0333 | PHP</a>
+                    <p>web developer at ovo</p>
+                </div>
+            </div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco lab</div>
+        </div>
+        <div class="container col-6" style="background-color:white;margin-top:10px;">      
+            <div class="mx-auto">
+                <img src="img/farion.png" style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                <div class="d-inline-block align-middle ">
+                    <a href="#" class="fs-3 text-decoration-none">farion 0333 | PHP</a>
+                    <p>web developer at ovo</p>
+                </div>
+            </div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco lab</div>
+        </div>
+    </div>
     <footer class="d-flex justify-content-end" style="background-color: #D9D9D9; position: fixed;  bottom: 0; width: 100%;">
         <p class="mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
     </footer>

@@ -27,10 +27,18 @@ session_start();
             <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
             <?php
-            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
+            if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") { 
                 $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
                 $result = $db->query($sqlprofile);
-                $row = $result->fetch(PDO::FETCH_ASSOC)
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+            ?>
+                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+            <?php
+            } else if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "admin") {
+                $sqlprofile = "SELECT * FROM admin WHERE id = {$_SESSION['user_id']}";
+                $result = $db->query($sqlprofile);
+                $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
                 <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
                 <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
