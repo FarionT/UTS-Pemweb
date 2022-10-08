@@ -56,24 +56,24 @@ require('db.php');
                 </p>
             </div>
             <div class="d-flex flex-column align-items-center p-5" style="width: 35%; background-color: #F2F2F2; border: 1px solid #FFB800;border-bottom: 5px solid #FFB800; border-right: 5px solid #FFB800; border-radius: 15px;">
-                <form action="login_proses.php" method="post" class="d-flex flex-column">
+                <form action="forgot_password_proses.php" method="post" class="d-flex flex-column">
                     <div class="d-flex flex-column align-items-start">
                         <h5 class="align-self-center mb-0" style="width: 150%;">Email</h5>
-                        <input class="align-self-center mb-2" type="text" name="email" style="border: 0px; width: 150%;" />                        
+                        <input required class="align-self-center mb-2" type="text" name="email" style="border: 0px; width: 150%;" />                        
                     </div>
                     <div class="d-flex flex-column">
                         <h5 class="align-self-center mb-0" style="width: 150%;">Old Password</h5>
-                        <input class="align-self-center mb-3" type="password" name="oldpassword" style="border: 0px; width: 150%;" />
+                        <input required class="align-self-center mb-3" type="password" name="oldpassword" style="border: 0px; width: 150%;" />
                     </div>
                     <div class="d-flex flex-column">
                         <h5 class="align-self-center mb-0" style="width: 150%;">New Password</h5>
-                        <input class="align-self-center mb-3" type="password" name="newpassword" style="border: 0px; width: 150%;" />
+                        <input required class="align-self-center mb-3" type="password" name="newpassword" style="border: 0px; width: 150%;" />
                     </div>
                     <div class="d-flex flex-column">
                         <h5 class="align-self-center mb-0" style="width: 150%;">Confirm Password</h5>
-                        <input class="align-self-center mb-3" type="password" name="confirmpassword" style="border: 0px; width: 150%;" />
+                        <input required class="align-self-center mb-3" type="password" name="confirmpassword" style="border: 0px; width: 150%;" />
                     </div>
-                    <button style="width: 150%; border-radius: 15px; font-size: 18px;" class="btn btn-warning align-self-center" type="submit">Masuk</button>
+                    <button style="width: 150%; border-radius: 15px; font-size: 18px;" class="btn btn-warning align-self-center" type="submit">Confirm</button>
                 </form>
             </div>
         </div>
