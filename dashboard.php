@@ -18,14 +18,22 @@ require('db.php');
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
-            <a href="kategori.php?kategori=c" class="h3 text-body text-decoration-none mt-2">C</a>
-            <a href="kategori.php?kategori=php" class="h3 text-body text-decoration-none mt-2">PHP</a>
-            <a href="kategori.php?kategori=python" class="h3 text-body text-decoration-none mt-2">Python</a>
-            <a href="kategori.php?kategori=java" class="h3 text-body text-decoration-none mt-2">Java</a>
-            <a href="kategori.php?kategori=javascript" class="h3 text-body text-decoration-none mt-2">Javascript</a>
+            <a href="kategori.php?kategori=C" class="h3 text-body text-decoration-none mt-2">C</a>
+            <a href="kategori.php?kategori=PHP" class="h3 text-body text-decoration-none mt-2">PHP</a>
+            <a href="kategori.php?kategori=Python" class="h3 text-body text-decoration-none mt-2">Python</a>
+            <a href="kategori.php?kategori=Java" class="h3 text-body text-decoration-none mt-2">Java</a>
+            <a href="kategori.php?kategori=Javascript" class="h3 text-body text-decoration-none mt-2">Javascript</a>
         </div>
         <div class="d-flex me-5">
-            <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
+            <?php
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
+                <a href="#" class="h2 text-body text-decoration-none mt-2" data-bs-toggle="modal" data-bs-target="#modal_create">Create</a>
+            <?php
+            } else { ?>
+                <a href="login.php" class="h2 text-body text-decoration-none mt-2">Create</a>
+            <?php
+            }
+            ?>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
             <?php
             if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") { 
@@ -52,30 +60,72 @@ require('db.php');
             ?>
         </div>
     </nav>
-    <div class="container">
-        <div class="container col-6" style="background-color:white;margin-top:10px;">      
-            <div class="mx-auto">
-                <img src="img/farion.png" style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
-                <div class="d-inline-block align-middle ">
-                    <a href="#" class="fs-3">farion 0333 | PHP</a>
-                    <p>web developer at ovo</p>
-                </div>
+    <?php
+    $sqlpost = "SELECT * FROM postingan";
+    $resultpost = $db->query($sqlpost);
+    while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {
+        $id_user = $rowpost['id_user'];
+        $sqluser = "SELECT * FROM user WHERE id = $id_user";
+        $resultuser = $db->query($sqluser);
+        $rowuser = $resultuser->fetch(PDO::FETCH_ASSOC);
+    ?>
+    <div class="container col-6 mt-5 pb-2" style="background-color:white;margin-top:10px;">      
+        <div class="mx-auto">
+            <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+            <div class="d-inline-block align-middle ">
+                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
+                <p><?=$row['pekerjaan']?></p>
             </div>
-            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco lab</div>
         </div>
-        <div class="container col-6" style="background-color:white;margin-top:10px;">      
-            <div class="mx-auto">
-                <img src="img/farion.png" style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
-                <div class="d-inline-block align-middle ">
-                    <a href="#" class="fs-3 text-decoration-none">farion 0333 | PHP</a>
-                    <p>web developer at ovo</p>
-                </div>
-            </div>
-            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco lab</div>
+        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
+        <div><?= $rowpost['konten'] ?></div>
+        <div><br>
+            <p class="d-inline">❤️10</p>
+            <p class="d-inline">✉️3</p>
+            <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
         </div>
     </div>
-    <footer class="d-flex justify-content-end" style="background-color: #D9D9D9; position: fixed;  bottom: 0; width: 100%;">
-        <p class="mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
+    <?php
+    }
+    ?>
+  <!--modal postingan  -->
+    <div class="modal fade" id="modal_create" style="border: 1px solid;padding: 10px;box-shadow: 5px 10px red;border-radius:10px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mx-auto container">
+                            <h1>Create Post</h1>
+                            <form action="create_post_proses.php" method="post" class="mx-auto my-auto">
+                                <div class="mb-4">
+                                    <label for="">Subject</label>
+                                    <input required type="text" name="subject" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Konten</label>
+                                    <textarea required type="text" name="konten" class="form-control" rows="3"></textarea>
+                                </div>
+                                <label for="">Category</label>
+                                    <select name="kategori" class="form-select"><br>
+                                        <option value="C">C</option>
+                                        <option value="PHP">PHP</option>
+                                        <option value="Python">Python</option>
+                                        <option value="Java">Java</option>
+                                        <option value="Javascript">Javascript</option>
+                                    </select>
+                                    <br>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-warning mb-2" style="width: 50%;">Post</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="d-flex justify-content-end" style="background-color: #000000; position: fixed;  bottom: 0; width: 100%;">
+        <p class="text-white mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
