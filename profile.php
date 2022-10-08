@@ -21,7 +21,7 @@ if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body style="background-color:#D9D9D9">
-<nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
+    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
@@ -116,7 +116,7 @@ if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                     <p class="mt-3 mb-0">Username: <?= $row['username'] ?></p>
                     <p class="mb-0" >Email: <?= $row['email'] ?></p>
                     <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
-                    <a href="#" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
+                    <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
                     <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
                 </div>
             </div>
