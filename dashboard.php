@@ -17,12 +17,12 @@ require('db.php');
     <nav class="shadow w-100 d-flex justify-content-between py-2">
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
-            <a href="#" class="h3 text-body text-decoration-none mt-2">ALL</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">C</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">PHP</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Python</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Java</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Javascript</a>
+            <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
+            <a href="kategori.php?kategori=c" class="h3 text-body text-decoration-none mt-2">C</a>
+            <a href="kategori.php?kategori=php" class="h3 text-body text-decoration-none mt-2">PHP</a>
+            <a href="kategori.php?kategori=python" class="h3 text-body text-decoration-none mt-2">Python</a>
+            <a href="kategori.php?kategori=java" class="h3 text-body text-decoration-none mt-2">Java</a>
+            <a href="kategori.php?kategori=javascript" class="h3 text-body text-decoration-none mt-2">Javascript</a>
         </div>
         <div class="d-flex me-5">
             <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
@@ -33,8 +33,8 @@ require('db.php');
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC)
             ?>
-                <a href="#"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="#" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
             <?php
             } else {
             ?>
