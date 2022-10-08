@@ -81,7 +81,6 @@ require('db.php');
             
             <div class="">
                 <p class="mt-2"><?= $rowpost['tanggal']?> <?= $rowpost['jam']?></p>
-                <!-- <p class="my-auto"><?= $rowpost['jam']?></p> -->
             </div>
         </div>
         <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
