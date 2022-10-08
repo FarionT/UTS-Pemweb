@@ -103,44 +103,47 @@ else if($_SESSION['user_role'] == "admin") {
         </div>
         <div class="d-flex justify-content-around">
             <div id="kiri" style="width:70%" class="d-inline-block">
-                <div class="bg-white p-3 mb-2" style="width:100%;height:auto">
-                    <div class="d-flex">
-                        <img src="img/default.png" class="d-inline-block align-middle" style="width:6%;height:6%"/>
-                        <div>
-                            <p class="mb-0 align-middle">Atong | PHP</p>
-                            <p>05 - 10 - 2022 13:23</p>
+                <?php
+                $sqlpost = "SELECT id, subject, konten, kategori, tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
+                $resultpost = $db->query($sqlpost);
+                while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) { ?>
+                <div class="container col-6 mt-5 pb-2" style="background-color:white;margin-top:10px;width:100%;">      
+                    <div class="mx-auto d-flex justify-content-between align-middle">
+                        <div class="d-inline-block">
+                            <img src=<?=$row['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                            <div class="d-inline-block align-middle ">
+                                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $row['username'] ?> | <?= $rowpost['kategori'] ?></a>
+                                <p><?=$row['pekerjaan']?></p>
+                            </div>
+                        </div>
+                        
+                        <div class="">
+                            <p class="mt-2"><?= $rowpost['tanggal']?> <?= $rowpost['jam']?></p>
                         </div>
                     </div>
-                    <div>
-                        <p>PHP adalah bahasa pemrograman yang diciptakan pada tahun 1995</p>
-                    </div>
-                    <div>
+                    <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
+                    <div><?= $rowpost['konten'] ?></div>
+                    <div><br>
                         <p class="d-inline">❤️10</p>
                         <p class="d-inline">✉️3</p>
+                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
                     </div>
                 </div>
-                <div class="bg-white p-3 mb-2" style="width:100%;height:auto">
-                    <div class="d-flex">
-                        <img src="img/default.png" class="d-inline-block align-middle" style="width:6%;height:6%"/>
-                        <div>
-                            <p class="mb-0 align-middle">Atong | PHP</p>
-                            <p>05 - 10 - 2022 13:23</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p>PHP adalah bahasa pemrograman yang diciptakan pada tahun 1995</p>
-                    </div>
-                    <div>
-                        <p class="d-inline">❤️10</p>
-                        <p class="d-inline">✉️3</p>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
+
             </div>
             
             <div id="kanan"  style="width:25%;" class="justify-content-center">
                 <div class="bg-white text-center mb-3 d-inline-block" style="width:100%">
                     <p>Postingan</p>
-                    <p>1</p>
+                    <?php
+                    $sqlpostingan = "SELECT COUNT(*) as jumlah FROM postingan WHERE id_user = {$row['id']}";
+                    $resultpostingan = $db->query($sqlpostingan);
+                    $rowpostingan = $resultpostingan->fetch(PDO::FETCH_ASSOC);
+                    ?>
+                    <p><?= $rowpostingan['jumlah'] ?></p>
                 </div>
                 <br/>
                 <div class="bg-white text-center d-inline-block pt-2" style="width:100%">
@@ -153,6 +156,43 @@ else if($_SESSION['user_role'] == "admin") {
                     }
                     ?>
                     <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal postingan  -->
+    <div class="modal fade" id="modal_create" style="border: 1px solid;padding: 10px;box-shadow: 5px 10px red;border-radius:10px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mx-auto container">
+                            <h1>Create Post</h1>
+                            <form action="create_post_proses.php" method="post" class="mx-auto my-auto">
+                                <div class="mb-4">
+                                    <label for="">Subject</label>
+                                    <input required type="text" name="subject" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Konten</label>
+                                    <textarea required type="text" name="konten" class="form-control" rows="3"></textarea>
+                                </div>
+                                <label for="">Category</label>
+                                    <select name="kategori" class="form-select"><br>
+                                        <option value="C">C</option>
+                                        <option value="PHP">PHP</option>
+                                        <option value="Python">Python</option>
+                                        <option value="Java">Java</option>
+                                        <option value="Javascript">Javascript</option>
+                                    </select>
+                                    <br>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-warning mb-2" style="width: 50%;">Post</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

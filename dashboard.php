@@ -61,7 +61,7 @@ require('db.php');
         </div>
     </nav>
     <?php
-    $sqlpost = "SELECT * FROM postingan";
+    $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan";
     $resultpost = $db->query($sqlpost);
     while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {
         $id_user = $rowpost['id_user'];
@@ -75,7 +75,7 @@ require('db.php');
                 <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
                 <div class="d-inline-block align-middle ">
                     <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
-                    <p><?=$row['pekerjaan']?></p>
+                    <p><?=$rowuser['pekerjaan']?></p>
                 </div>
             </div>
             
