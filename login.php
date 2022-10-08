@@ -13,20 +13,34 @@ session_start();
         <title>NgodingCoy</title>
 </head>
 <body>
-    <nav class="shadow w-100 d-flex justify-content-between py-2">
+    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
-            <a href="#" class="h3 text-body text-decoration-none mt-2">ALL</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">C</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">PHP</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Python</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Java</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Javascript</a>
+            <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
+            <a href="kategori.php?kategori=c" class="h3 text-body text-decoration-none mt-2">C</a>
+            <a href="kategori.php?kategori=php" class="h3 text-body text-decoration-none mt-2">PHP</a>
+            <a href="kategori.php?kategori=python" class="h3 text-body text-decoration-none mt-2">Python</a>
+            <a href="kategori.php?kategori=java" class="h3 text-body text-decoration-none mt-2">Java</a>
+            <a href="kategori.php?kategori=javascript" class="h3 text-body text-decoration-none mt-2">Javascript</a>
         </div>
         <div class="d-flex me-5">
             <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
+            <?php
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
+                $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
+                $result = $db->query($sqlprofile);
+                $row = $result->fetch(PDO::FETCH_ASSOC)
+            ?>
+                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+            <?php
+            } else {
+            ?>
             <a href="login.php" class="h2 text-body text-decoration-none mt-2">Log In</a>
+            <?php
+            }
+            ?>
         </div>
     </nav>
     <div class="container">
@@ -52,7 +66,7 @@ session_start();
                     </div>
                     <button style="width: 150%; border-radius: 15px; font-size: 18px;" class="btn btn-warning align-self-center" type="submit">Masuk</button>
                 </form>
-                <form action="" method="post" class="mb-3">
+                <form action="forgot_password.php" method="post" class="mb-3">
                     <button type="submit" style="border: 0px solid black;">Lupa password?</button>
                 </form>
                 <form action="register.php" method="post" class="d-flex flex-column align-items-center">

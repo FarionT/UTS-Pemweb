@@ -1,37 +1,73 @@
+<?php
+session_start();
+require('db.php');
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $sql = "SELECT * FROM user WHERE username = ?";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$username]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ngoding Coy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body style="background-color:#D9D9D9">
-    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color:#FFFFFF">
-        <a href="#" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
+<nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
+        <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
-            <a href="#" class="h3 text-body text-decoration-none mt-2">ALL</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">C</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">PHP</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Python</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Java</a>
-            <a href="#" class="h3 text-body text-decoration-none mt-2">Javascript</a>
+            <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
+            <a href="kategori.php?kategori=c" class="h3 text-body text-decoration-none mt-2">C</a>
+            <a href="kategori.php?kategori=php" class="h3 text-body text-decoration-none mt-2">PHP</a>
+            <a href="kategori.php?kategori=python" class="h3 text-body text-decoration-none mt-2">Python</a>
+            <a href="kategori.php?kategori=java" class="h3 text-body text-decoration-none mt-2">Java</a>
+            <a href="kategori.php?kategori=javascript" class="h3 text-body text-decoration-none mt-2">Javascript</a>
         </div>
         <div class="d-flex me-5">
             <a href="#" class="h2 text-body text-decoration-none mt-2">Create</a>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
-            <a href="#" class="h2 text-body text-decoration-none mt-2">Log In</a>
+            <?php
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
+                $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
+                $result = $db->query($sqlprofile);
+                $row = $result->fetch(PDO::FETCH_ASSOC)
+            ?>
+                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+            <?php
+            } else {
+            ?>
+            <a href="login.php" class="h2 text-body text-decoration-none mt-2">Log In</a>
+            <?php
+            }
+            ?>
         </div>
     </nav>
     <div class="container">
         <div class="my-5 p-5" style=" height:200px;background-image:url('img/bg_profile.png');border-radius:20px;">
 
-            <img src="img/default.png" class="d-inline-block my-auto" style="width:10%" />
+            <img src=<?= $row['profile'] ?> class="d-inline-block my-auto" style="width:10%" />
 
             <div class="d-inline-block">
-                <h4>Atong</h4>
-                <p>Lorem ipsum dolor sit amet</p>
+                <?php
+                if($row['namabelakang'] == NULL) {?>
+                    <h4><?= $row['namadepan'] ?></h4>
+                <?php
+                } else {
+                ?>
+                    <h4><?= $row['namadepan'] . ' ' . $row['namabelakang']?></h4>    
+                <?php
+                }
+                ?>
+                <p><?= $row['pekerjaan'] ?></p>
             </div>
         </div>
         <div class="d-flex justify-content-around">
@@ -77,9 +113,11 @@
                 </div>
                 <br/>
                 <div class="bg-white text-center d-inline-block" style="width:100%">
-                    <p>Username: atong123</p>
-                    <p>Email: atong@student.umn.ac.id</p>
-                    <a href="#" style="text-decoration:none">✏️Edit Profile</p>
+                    <p class="mt-3 mb-0">Username: <?= $row['username'] ?></p>
+                    <p class="mb-0" >Email: <?= $row['email'] ?></p>
+                    <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
+                    <a href="#" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
+                    <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('db.php');
 ?>
 
 <!DOCTYPE html>
@@ -54,47 +55,25 @@ session_start();
                     coy untuk memperluas pengetahuan anda
                 </p>
             </div>
-            <div class="d-flex flex-column align-items-center p-3" style="width: 40%; background-color: #F2F2F2; border: 1px solid #FFB800;border-bottom: 5px solid #FFB800; border-right: 5px solid #FFB800; border-radius: 15px;">
-                <form action="register_proses.php" method="post" class="d-flex flex-column">
+            <div class="d-flex flex-column align-items-center p-5" style="width: 35%; background-color: #F2F2F2; border: 1px solid #FFB800;border-bottom: 5px solid #FFB800; border-right: 5px solid #FFB800; border-radius: 15px;">
+                <form action="login_proses.php" method="post" class="d-flex flex-column">
                     <div class="d-flex flex-column align-items-start">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Username</h5>
-                        <input required class="align-self-center mb-2" type="text" name="username" style="border: 0px; width: 100%;" />                        
-                    </div>
-                    <div class="d-flex">
-                        <div class="d-flex flex-column align-items-start me-5" style="width: 150%;">
-                            <h5 class="align-self-start mb-0">Nama Depan</h5>
-                            <input required class="align-self-center mb-2" type="text" name="namadepan" style="border: 0px;" />                        
-                        </div>
-                        <div class="d-flex flex-column align-items-start">
-                            <h5 class="align-self-start mb-0">Nama Belakang</h5>
-                            <input class="align-self-center mb-2" type="text" name="namabelakang" style="border: 0px;" />                        
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Pekerjaan</h5>
-                        <input required class="align-self-center mb-2" type="text" name="pekerjaan" style="border: 0px; width: 100%;" />                        
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Email</h5>
-                        <input required class="align-self-center mb-2" type="text" name="email" style="border: 0px; width: 100%;" />                        
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Tanggal Lahir</h5>
-                        <input required class="align-self-center mb-2" type="date" name="tanggallahir" style="border: 0px; width: 100%;" />                        
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Profile</h5>
-                        <input class="btn btn-warning bg-warning align-self-center mb-2" type="file" name="profile" style="border: 0px; width: 100%;" />                        
+                        <h5 class="align-self-center mb-0" style="width: 150%;">Email</h5>
+                        <input class="align-self-center mb-2" type="text" name="email" style="border: 0px; width: 150%;" />                        
                     </div>
                     <div class="d-flex flex-column">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Password</h5>
-                        <input required class="align-self-center mb-3" type="password" name="password" style="border: 0px; width: 100%;" />
+                        <h5 class="align-self-center mb-0" style="width: 150%;">Old Password</h5>
+                        <input class="align-self-center mb-3" type="password" name="oldpassword" style="border: 0px; width: 150%;" />
                     </div>
                     <div class="d-flex flex-column">
-                        <h5 class="align-self-center mb-0" style="width: 100%;">Confirm Password</h5>
-                        <input required class="align-self-center mb-3" type="password" name="confirmpassword" style="border: 0px; width: 100%;" />
+                        <h5 class="align-self-center mb-0" style="width: 150%;">New Password</h5>
+                        <input class="align-self-center mb-3" type="password" name="newpassword" style="border: 0px; width: 150%;" />
                     </div>
-                    <button style="width: 100%; border-radius: 15px; font-size: 18px;" class="btn btn-warning align-self-center" type="submit">Masuk</button>
+                    <div class="d-flex flex-column">
+                        <h5 class="align-self-center mb-0" style="width: 150%;">Confirm Password</h5>
+                        <input class="align-self-center mb-3" type="password" name="confirmpassword" style="border: 0px; width: 150%;" />
+                    </div>
+                    <button style="width: 150%; border-radius: 15px; font-size: 18px;" class="btn btn-warning align-self-center" type="submit">Masuk</button>
                 </form>
             </div>
         </div>
