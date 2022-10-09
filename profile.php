@@ -106,14 +106,19 @@ else if($_SESSION['user_role'] == "admin") {
                 <?php
                 $sqlpost = "SELECT id, subject, konten, kategori, tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
                 $resultpost = $db->query($sqlpost);
-                while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) { ?>
-                <div class="container col-6 mt-5 pb-2" style="background-color:white;margin-top:10px;width:100%;">      
+                while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {
+                    $id_user = $rowpost['id_user'];
+                    $sqluser = "SELECT * FROM user WHERE id = $id_user";
+                    $resultuser = $db->query($sqluser);
+                    $rowuser = $resultuser->fetch(PDO::FETCH_ASSOC);
+                ?>
+                <div class="container col-6 pb-2" style="background-color:white;margin-top:10px; width:100%">      
                     <div class="mx-auto d-flex justify-content-between align-middle">
                         <div class="d-inline-block">
-                            <img src=<?=$row['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                            <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
                             <div class="d-inline-block align-middle ">
-                                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $row['username'] ?> | <?= $rowpost['kategori'] ?></a>
-                                <p><?=$row['pekerjaan']?></p>
+                                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
+                                <p><?=$rowuser['pekerjaan']?></p>
                             </div>
                         </div>
                         
@@ -124,15 +129,46 @@ else if($_SESSION['user_role'] == "admin") {
                     <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
                     <div><?= $rowpost['konten'] ?></div>
                     <div><br>
-                        <p class="d-inline">❤️10</p>
-                        <p class="d-inline">✉️3</p>
+                        <?php
+                            $sqljumlahcomment = "SELECT COUNT(*) AS jumlah FROM comment WHERE id_post = {$rowpost['id']}";
+                            $resultjumlahcomment = $db->query($sqljumlahcomment);
+                            $rowjumlahcomment = $resultjumlahcomment->fetch(PDO::FETCH_ASSOC);
+            
+                            $sqljumlahlike = "SELECT COUNT(*) AS jumlah FROM likepost WHERE id_post = {$rowpost['id']}";
+                            $resultjumlahlike = $db->query($sqljumlahlike);
+                            $rowjumlahlike = $resultjumlahlike->fetch(PDO::FETCH_ASSOC);
+            
+                            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                                $sqlusernow = "SELECT * FROM user WHERE username = ?";
+                                $stmtusernow = $db->prepare($sqlusernow);
+                                $stmtusernow->execute([$_SESSION['username']]);
+                                $rowusernow = $stmtusernow->fetch(PDO::FETCH_ASSOC);
+                
+                                $sqllike = "SELECT * FROM likepost WHERE id_user = {$rowusernow['id']} AND id_post = {$rowpost['id']}";
+                                $resultlike = $db->query($sqllike);
+                                $rowlike = $resultlike->fetch(PDO::FETCH_ASSOC);
+                
+                                if($rowlike) {?>
+                                    <a href="delete_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                <?php
+                                } else if(!$rowlike) { ?>
+                                    <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else { ?>
+                                <a href="login.php" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                            <?php
+                            }
+                            ?>
+                        <p class="d-inline">✉️<?=$rowjumlahcomment['jumlah'] ?></p>
                         <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
                     </div>
                 </div>
                 <?php
                 }
                 ?>
-
             </div>
             
             <div id="kanan"  style="width:25%;" class="justify-content-center">
