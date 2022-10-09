@@ -102,7 +102,6 @@ require('db.php');
                 </div>
             </div>
             <?php
-            
             $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE kategori = '$kategori'";
             $resultpost = $db->query($sqlpost);
             while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {

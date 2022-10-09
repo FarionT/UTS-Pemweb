@@ -95,7 +95,15 @@ require('db.php');
         </div>
         <br>
         <div type="text" class="align-self-end">
-            <form action="create_comment_proses.php" method="post">
+            <?php
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
+                <form action="create_comment_proses.php" method="post">
+            <?php
+            } else { ?>
+                <form action="login.php" method="post">
+            <?php
+            }
+            ?>
                 <div class="row">
                     <div class="d-flex">
                         <input type="text" name="comment" class="form-control"placeholder="Comment">
@@ -107,7 +115,7 @@ require('db.php');
         </div>
     </div>
     <?php
-        $sqlcomment = "SELECT * FROM comment WHERE id_post = $id_post";
+        $sqlcomment = "SELECT id, comment, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_post, id_user FROM comment WHERE id_post = $id_post";
         $resultcomment = $db->query($sqlcomment);
         while($rowcomment = $resultcomment->fetch(PDO::FETCH_ASSOC)) {
             $id_user_comment = $rowcomment['id_user'];
