@@ -36,16 +36,8 @@ require('db.php');
             ?>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
             <?php
-            if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") { 
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
                 $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
-                $result = $db->query($sqlprofile);
-                $row = $result->fetch(PDO::FETCH_ASSOC);
-            ?>
-                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
-            <?php
-            } else if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "admin") {
-                $sqlprofile = "SELECT * FROM admin WHERE id = {$_SESSION['user_id']}";
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
@@ -95,7 +87,7 @@ require('db.php');
                 $resultjumlahlike = $db->query($sqljumlahlike);
                 $rowjumlahlike = $resultjumlahlike->fetch(PDO::FETCH_ASSOC);
 
-                if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") {
                     $sqlusernow = "SELECT * FROM user WHERE username = ?";
                     $stmtusernow = $db->prepare($sqlusernow);
                     $stmtusernow->execute([$_SESSION['username']]);

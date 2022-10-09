@@ -15,10 +15,13 @@ $tanggallahir = $_POST['tanggallahir'];
 $password = $_POST['password'];
 $role = "user";
 
-if($_FILES['profile']['size'] == 0 && $_FILES['profile']['error'] == 0) {
+if($_FILES['profile']['name'] == "") {
+    $profile = "profile/default.png";
+}
+else {
     $filename = $_FILES['profile']['name'];
     $temp_file = $_FILES['profile']['tmp_name'];
-
+    
     $file_ext = explode(".", $filename);
     $file_ext = end($file_ext);
     $file_ext = strtolower($file_ext);
@@ -39,9 +42,6 @@ if($_FILES['profile']['size'] == 0 && $_FILES['profile']['error'] == 0) {
             die();
     }
     $profile = "profile/{$filename}";
-}
-else {
-    $profile = "profile/default.png";
 }
 
 $en_pass = password_hash($password, PASSWORD_BCRYPT);

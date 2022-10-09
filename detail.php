@@ -15,7 +15,7 @@ require('db.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body style="background-color:#D9D9D9">
-    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
+<nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
@@ -37,16 +37,8 @@ require('db.php');
             ?>
             <h2 class="mt-2">&nbsp;|&nbsp;</h2>
             <?php
-            if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") { 
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
                 $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
-                $result = $db->query($sqlprofile);
-                $row = $result->fetch(PDO::FETCH_ASSOC);
-            ?>
-                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
-            <?php
-            } else if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "admin") {
-                $sqlprofile = "SELECT * FROM admin WHERE id = {$_SESSION['user_id']}";
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
@@ -73,10 +65,10 @@ require('db.php');
     ?>
     <div class="mx-auto container mt-3 col-6 pb-3" style="background-color:white">
         <div class="mx-auto d-flex justify-content-between align-middle">
-            <div class="d-inline-block">
-                <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+        <div class="d-inline-block">
+                <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
                 <div class="d-inline-block align-middle ">
-                    <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
+                    <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
                     <p><?=$rowuser['pekerjaan']?></p>
                 </div>
             </div>
@@ -172,7 +164,35 @@ require('db.php');
             </div>
             <div><?= $rowcomment['comment'] ?></div>
             <div><br>
-                <p class="d-inline">❤️10</p>
+            <?php
+                $sqljumlahlikecomment = "SELECT COUNT(*) AS jumlah FROM likecomment WHERE id_comment = {$rowcomment['id']}";
+                $resultjumlahlikecomment = $db->query($sqljumlahlikecomment);
+                $rowjumlahlikecomment = $resultjumlahlikecomment->fetch(PDO::FETCH_ASSOC);
+
+                if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                    $sqlusernow = "SELECT * FROM user WHERE username = ?";
+                    $stmtusernow = $db->prepare($sqlusernow);
+                    $stmtusernow->execute([$_SESSION['username']]);
+                    $rowusernow = $stmtusernow->fetch(PDO::FETCH_ASSOC);
+    
+                    $sqllike = "SELECT * FROM likecomment WHERE id_user = {$rowusernow['id']} AND id_comment = {$rowcomment['id']}";
+                    $resultlike = $db->query($sqllike);
+                    $rowlike = $resultlike->fetch(PDO::FETCH_ASSOC);
+    
+                    if($rowlike) {?>
+                        <a href="delete_like_comment.php?id_comment=<?= $rowcomment['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
+                    <?php
+                    } else if(!$rowlike) { ?>
+                        <a href="create_like_comment.php?id_comment=<?= $rowcomment['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
+                    <?php
+                    }
+                    ?>
+                <?php
+                } else { ?>
+                    <a href="login.php" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
+                <?php
+                }
+                ?>
             </div>
         </div>
     <?php

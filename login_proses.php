@@ -5,14 +5,8 @@ require_once('db.php');
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-if($username == "admin") {
-    $sql = "SELECT * FROM admin
+$sql = "SELECT * FROM user
         WHERE username = ?";
-}
-else {
-    $sql = "SELECT * FROM user
-        WHERE username = ?";
-}
 
 $stmt = $db->prepare($sql);
 $stmt->execute([$username]);
