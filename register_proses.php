@@ -15,7 +15,7 @@ $tanggallahir = $_POST['tanggallahir'];
 $password = $_POST['password'];
 $role = "user";
 
-if(isset($_FILES['profile']) && !empty($_FILES['profile'])) {
+if($_FILES['profile']['size'] == 0 && $_FILES['profile']['error'] == 0) {
     $filename = $_FILES['profile']['name'];
     $temp_file = $_FILES['profile']['tmp_name'];
 
