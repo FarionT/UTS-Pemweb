@@ -5,17 +5,33 @@ require('db.php');
 //if(isset($_GET['id_post']))
 if(isset($_POST['post_id'])){
     $post_id = $_POST['post_id'];
-    $query1 = "DELETE FROM comment WHERE
-                id_post = ?";
-    $result = $db->prepare($query1);
-    $result->execute([$post_id]);
-
-    $query2 = "DELETE FROM postingan WHERE
-                id = ?";
-    $result2 = $db->prepare($query2);
-    $result2->execute([$post_id]);
+    $sql = "SELECT * FROM comment WHERE id_post = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$post_id]);
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        
+        $query1 = "DELETE FROM likecomment WHERE
+                    id_comment = ?";
+        $result = $db->prepare($query1);
+        $result->execute([$row['id']]);
     
-    header("Location: $_SERVER(HTTP_REFERER)");
+        $query2 = "DELETE FROM comment WHERE
+                    id = ?";
+        $result2 = $db->prepare($query2);
+        $result2->execute([$row['id']]);
+    }
+
+    $query3 = "DELETE FROM likepost WHERE
+                id_post = ?";
+    $result3 = $db->prepare($query3);
+    $result3->execute([$post_id]);
+
+    $query4 = "DELETE FROM postingan WHERE
+                id = ?";
+    $result4 = $db->prepare($query4);
+    $result4->execute([$post_id]);
+    
+    header("Location: dashboard.php");
 }
 ?>
 
