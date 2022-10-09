@@ -72,9 +72,9 @@ require('db.php');
     <div class="container col-6 mt-5 pb-2" style="background-color:white;margin-top:10px;">      
         <div class="mx-auto d-flex justify-content-between align-middle">
             <div class="d-inline-block">
-                <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
                 <div class="d-inline-block align-middle ">
-                    <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
+                    <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
                     <p><?=$rowuser['pekerjaan']?></p>
                 </div>
             </div>

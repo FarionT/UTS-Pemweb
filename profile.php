@@ -77,7 +77,16 @@ else if($_SESSION['user_role'] == "admin") {
     </nav>
     <div class="container">
         <div class="my-5 p-5" style=" height:200px;background-image:url('img/bg_profile.png');border-radius:20px;">
-
+            <?php
+            if(isset($_GET['id_user_profile']) && !empty($_GET['id_user_profile'])) {
+                $id_user_profile = $_GET['id_user_profile'];
+                $sql = "SELECT * FROM user WHERE id = ?";
+            
+                $stmt = $db->prepare($sql);
+                $stmt->execute([$id_user_profile]);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            ?>
             <img src=<?= $row['profile'] ?> class="d-inline-block my-auto" style="width:10%" />
 
             <div class="d-inline-block">
