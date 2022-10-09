@@ -170,8 +170,13 @@ require('db.php');
                     <p class="mt-3 mb-0">Username: <?= $row['username'] ?></p>
                     <p class="mb-0" >Email: <?= $row['email'] ?></p>
                     <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
-                    <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
-                    <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
+                    <?php
+                        if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id']) && $_SESSION['user_id'] == $row['id']) { ?>
+                            <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
+                            <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
+                        <?php
+                        }
+                        ?>
                 </div>
             </div>
         </div>
