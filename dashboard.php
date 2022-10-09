@@ -53,7 +53,18 @@ require('db.php');
         </div>
     </nav>
     <?php
-    $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan";
+    $sqlpost = "SELECT 
+                id, 
+                subject, 
+                konten, 
+                kategori, 
+                CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, 
+                LEFT(jam, 5) AS jam, 
+                id_user, 
+                (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3 + 
+                (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7 AS trend
+                FROM postingan
+                ORDER BY trend DESC";
     $resultpost = $db->query($sqlpost);
     while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {
         $id_user = $rowpost['id_user'];

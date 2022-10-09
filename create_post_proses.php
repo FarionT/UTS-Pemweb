@@ -22,4 +22,4 @@ $sql = "INSERT INTO postingan (subject, konten, kategori, tanggal, jam, id_user)
 $stmt = $db->prepare($sql);
 $stmt->execute([$subject, $konten, $kategori, $tanggal, $jam, $id_user]);
 
-header('location: dashboard.php');
+header("Location: $_SERVER[HTTP_REFERER]");
