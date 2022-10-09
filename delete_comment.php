@@ -5,7 +5,7 @@ require('db.php');
 //if(isset($_GET['id_post']))
 if(isset($_POST['comment_id'])){
     $comment_id = $_POST['comment_id'];
-    $sql = "SELECT * FROM comment WHERE id_post = ?";
+    $sql = "SELECT * FROM comment WHERE id = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute([$comment_id]);
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
