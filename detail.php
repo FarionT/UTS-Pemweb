@@ -130,7 +130,7 @@ require('db.php');
             ?>
                 <div class="row">
                     <div class="d-flex">
-                        <input type="text" name="comment" class="form-control"placeholder="Comment">
+                        <input required type="text" name="comment" class="form-control"placeholder="Comment">
                         <input hidden name="id_post" value=<?= $rowpost['id'] ?> />
                         <button type="submit" style="border: 0px; background-color: #FFFFFF;"><img src="img/send.png" style="width:30px; height:20px;"/></button>
                     </div>
