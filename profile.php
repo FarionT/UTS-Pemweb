@@ -20,7 +20,7 @@ require('db.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body style="background-color:#D9D9D9">
-<nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
+    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
@@ -47,8 +47,8 @@ require('db.php');
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
-                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
             <?php
             } else {
             ?>
@@ -63,8 +63,17 @@ require('db.php');
             <?php
             if(isset($_GET['id_user_profile']) && !empty($_GET['id_user_profile'])) {
                 $id_user_profile = $_GET['id_user_profile'];
-                $sql = "SELECT * FROM user WHERE id = ?";
-            
+                $sql = "SELECT 
+                        id,
+                        username,
+                        namadepan,
+                        namabelakang,
+                        pekerjaan,
+                        email,
+                        CONCAT(DAY(tanggallahir), ' ', MONTHNAME(tanggallahir), ' ', YEAR(tanggallahir)) AS tanggallahir,
+                        role,
+                        profile
+                        FROM user WHERE id = ?";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([$id_user_profile]);
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -88,7 +97,7 @@ require('db.php');
         <div class="d-flex justify-content-around">
             <div id="kiri" style="width:70%" class="d-inline-block">
                 <?php
-                $sqlpost = "SELECT id, subject, konten, kategori, tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
+                $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
                 $resultpost = $db->query($sqlpost);
                 while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {
                     $id_user = $rowpost['id_user'];
@@ -105,7 +114,6 @@ require('db.php');
                                 <p><?=$rowuser['pekerjaan']?></p>
                             </div>
                         </div>
-                        
                         <div class="">
                             <p class="mt-2"><?= $rowpost['tanggal']?> <?= $rowpost['jam']?></p>
                         </div>
@@ -171,12 +179,30 @@ require('db.php');
                     <p class="mb-0" >Email: <?= $row['email'] ?></p>
                     <p>Tanggal Lahir: <?= $row['tanggallahir'] ?></p>
                     <?php
+                        if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin" && $row['username'] == "admin") { ?>
+                            <a href="export.php" class="text-body" style="text-decoration:none">📁 Export</p>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin" && $row['role'] == "user") { ?>
+                            <a href="ban.php?id_user=<?=$row['id']?>" class="text-body" style="text-decoration:none">⛔ Ban</p>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin" && $row['role'] == "ban") { ?>
+                            <a href="unban.php?id_user=<?=$row['id']?>" class="text-body" style="text-decoration:none">⛔ Unban</p>
+                    <?php
+                        }
+                    ?>
+                    <?php
                         if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id']) && $_SESSION['user_id'] == $row['id']) { ?>
                             <a href="edit_account.php" class="text-body" style="text-decoration:none">✏️ Edit Profile</p>
                             <a href="logout.php" class="text-body" style="text-decoration:none">🚪➡ Log Out</p>
-                        <?php
+                    <?php
                         }
-                        ?>
+                    ?>
                 </div>
             </div>
         </div>

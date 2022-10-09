@@ -41,8 +41,8 @@ require('db.php');
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
-                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
             <?php
             } else {
             ?>

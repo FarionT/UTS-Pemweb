@@ -14,7 +14,7 @@ require_once('db.php');
         <title>NgodingCoy</title>
 </head>
 <body>
-<nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
+    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
         <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
@@ -41,8 +41,8 @@ require_once('db.php');
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
-                <a href="profile.php"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="profile.php" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
             <?php
             } else {
             ?>

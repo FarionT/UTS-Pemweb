@@ -1,0 +1,17 @@
+{
+    "name": "ngodingcoy/uts",
+    "autoload": {
+        "psr-4": {
+            "Ngodingcoy\\Uts\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Axel Ferdinand",
+            "email": "axel.ferdinand.88@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.25"
+    }
+}
