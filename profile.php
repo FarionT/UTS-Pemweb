@@ -74,23 +74,15 @@ require('db.php');
 
             <div class="d-inline-block">
                 <?php
-                if($_SESSION['user_role'] == "user") {
                     if($row['namabelakang'] == NULL) {?>
                         <h4><?= $row['namadepan'] ?></h4>
                         <?php
-                    } else {
-                        ?>
+                    } else { ?>
                         <h4><?= $row['namadepan'] . ' ' . $row['namabelakang']?></h4>    
-                        <?php
+                    <?php
                     }
                     ?>
                     <p><?= $row['pekerjaan'] ?></p>
-                <?php
-                } else if($_SESSION['user_role'] == "admin") { ?>
-                    <h2 class="ms-5">Admin</h2>
-                <?php
-                }
-                ?>
             </div>
         </div>
         <div class="d-flex justify-content-around">
