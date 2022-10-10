@@ -1,6 +1,10 @@
 <?php
 session_start();
 require('db.php');
+if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "ban") {
+    header('location: banned.php');
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -127,14 +131,12 @@ require('db.php');
                 <p class="d-inline">✉️<?=$rowjumlahcomment['jumlah'] ?></p>
                 <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
             </div>
-            
             <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
             <div class="py-auto">
                 <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
             </div>
             <?php } ?>
         </div>
-        
         </div>
     </div>
     <?php

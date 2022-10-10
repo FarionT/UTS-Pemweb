@@ -241,7 +241,6 @@ if(isset($_POST['post_id'])){
             <button class="btn btn-primary" onclick="history.back()">No</button>
             
         </div>
-        
     </div>
     <!--modal postingan  -->
     <div class="modal fade" id="modal_create" style="border: 1px solid;padding: 10px;box-shadow: 5px 10px red;border-radius:10px;">

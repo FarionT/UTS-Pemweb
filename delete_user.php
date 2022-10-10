@@ -6,27 +6,48 @@ if(isset($_GET['id_user']) && !empty($_GET['id_user'])) {
     $id_user = $_GET['id_user'];
 }
 else if(isset($_POST['id_user']) && !empty($_POST['id_user'])) {
-    $id_user_ban = $_POST['id_user'];
-    if($_POST['waktuban'] == "permanent") {
-        $sql = "UPDATE user
-                SET role = 'ban',
-                tanggalban = NULL
-                WHERE id = {$id_user_ban}";
-        $db->query($sql);
+    $id_user = $_POST['id_user'];
+    $sqlpost = "SELECT * FROM postingan WHERE id_user = ?";
+    $stmtpost = $db->prepare($sqlpost);
+    $stmtpost->execute([$id_user]);
+    while($rowpost = $stmtpost->fetch(PDO::FETCH_ASSOC)) {
+        $sql = "SELECT * FROM comment WHERE id_post = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$rowpost['id']]);
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $query1 = "DELETE FROM likecomment WHERE id_comment = ?";
+            $result = $db->prepare($query1);
+            $result->execute([$row['id']]);
+
+            $query2 = "DELETE FROM comment WHERE id = ?";
+            $result2 = $db->prepare($query2);
+            $result2->execute([$row['id']]);  
+        }
+
+        $query3 = "DELETE FROM likepost WHERE id_post = ?";
+        $result3 = $db->prepare($query3);
+        $result3->execute([$rowpost['id']]);
+ 
+        $query4 = "DELETE FROM postingan WHERE id = ?";
+        $result4 = $db->prepare($query4);
+        $result4->execute([$rowpost['id']]);
     }
-    else {
-        date_default_timezone_set('Asia/Jakarta');
-        $waktuban = $_POST['waktuban'];
-        $date = date_create(date('y-m-d'));
-        date_add($date,date_interval_create_from_date_string($waktuban));
-        $tanggalban = date_format($date,"Y-m-d");
-        $sql = "UPDATE user
-                SET role = 'ban',
-                tanggalban = '$tanggalban'
-                WHERE id = {$id_user_ban}";
-        $db->query($sql);
-    }
-    header("Location: profile.php?id_user_profile=".$id_user_ban);
+        $query1 = "DELETE FROM likecomment WHERE id_user = ?";
+        $result = $db->prepare($query1);
+        $result->execute([$id_user]);
+
+        $query2 = "DELETE FROM comment WHERE id_user = ?";
+        $result2 = $db->prepare($query2);
+        $result2->execute([$id_user]);
+
+        $query3 = "DELETE FROM likepost WHERE id_user = ?";
+        $result3 = $db->prepare($query3);
+        $result3->execute([$id_user]);
+    
+        $query5 = "DELETE FROM user WHERE id = ?";
+        $result5 = $db->prepare($query5);
+        $result5->execute([$id_user]);
+    header("Location: dashboard.php");
 }
 ?>
 
@@ -112,16 +133,9 @@ else if(isset($_POST['id_user']) && !empty($_POST['id_user'])) {
             </div>
         </div>
         <div class="container text-center bg-white col-6 my-5 p-2">
-            <h3>Are you sure to ban this user?</h3>  
+            <h3>Are you sure to delete this user?</h3>  
             <div class="">
-                <form action="ban.php" method="post" class="d-inline-block">
-                    <select name="waktuban" class="form-select"><br>
-                            <option value="1 days">1 Hari</option>
-                            <option value="3 days">3 Hari</option>
-                            <option value="7 days">1 Minggu</option>
-                            <option value="30 days">1 Bulan</option>
-                            <option value="permanent">Permanent</option>
-                    </select>
+                <form action="delete_user.php" method="post" class="d-inline-block">
                     <input hidden name="id_user" value='<?= $row['id']?>' />
                     <button class="btn btn-primary">Yes</button>
                 </form>

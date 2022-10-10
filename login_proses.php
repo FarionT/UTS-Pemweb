@@ -22,6 +22,26 @@ else {
         die();
     }
     else {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentdate = "20" . date('y-m-d');
+        $tanggalban = $row['tanggalban'];
+        // echo $currentdate . "<br />";
+        // echo $tanggalban;
+        if(isset($tanggalban) && !empty($tanggalban) && $tanggalban < $currentdate && $row['role'] == "ban") {
+            $sqlban = "UPDATE user
+                    SET role = 'user',
+                    tanggalban = NULL
+                    WHERE id = {$row['id']}";
+            $db->query($sqlban);
+
+            $sql = "SELECT * FROM user
+                WHERE username = ?";
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$username]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_role'] = $row['role'];

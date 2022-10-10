@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once('db.php');
+if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "ban") {
+    header('location: banned.php');
+    die();
+}
 ?>
 
 <!DOCTYPE html>

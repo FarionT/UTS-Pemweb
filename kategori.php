@@ -1,6 +1,10 @@
 <?php
 session_start();
 require('db.php');
+if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "ban") {
+    header('location: banned.php');
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +121,7 @@ require('db.php');
             <div class="container col-6 mt-5 pb-2" style="background-color:white;margin-top:10px;">      
                 <div class="mx-auto d-flex justify-content-between align-middle">
                     <div class="d-inline-block">
-                        <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                    <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
                         <div class="d-inline-block align-middle ">
                             <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
                             <p><?=$rowuser['pekerjaan']?></p>
@@ -130,42 +134,49 @@ require('db.php');
                 </div>
                 <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
                 <div><?= $rowpost['konten'] ?></div>
-                <div><br>
-                    <?php
-                        $sqljumlahcomment = "SELECT COUNT(*) AS jumlah FROM comment WHERE id_post = {$rowpost['id']}";
-                        $resultjumlahcomment = $db->query($sqljumlahcomment);
-                        $rowjumlahcomment = $resultjumlahcomment->fetch(PDO::FETCH_ASSOC);
-        
-                        $sqljumlahlike = "SELECT COUNT(*) AS jumlah FROM likepost WHERE id_post = {$rowpost['id']}";
-                        $resultjumlahlike = $db->query($sqljumlahlike);
-                        $rowjumlahlike = $resultjumlahlike->fetch(PDO::FETCH_ASSOC);
-        
-                        if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-                            $sqlusernow = "SELECT * FROM user WHERE username = ?";
-                            $stmtusernow = $db->prepare($sqlusernow);
-                            $stmtusernow->execute([$_SESSION['username']]);
-                            $rowusernow = $stmtusernow->fetch(PDO::FETCH_ASSOC);
+                <div class="d-flex justify-content-between">
+                    <div><br>
+                        <?php
+                            $sqljumlahcomment = "SELECT COUNT(*) AS jumlah FROM comment WHERE id_post = {$rowpost['id']}";
+                            $resultjumlahcomment = $db->query($sqljumlahcomment);
+                            $rowjumlahcomment = $resultjumlahcomment->fetch(PDO::FETCH_ASSOC);
             
-                            $sqllike = "SELECT * FROM likepost WHERE id_user = {$rowusernow['id']} AND id_post = {$rowpost['id']}";
-                            $resultlike = $db->query($sqllike);
-                            $rowlike = $resultlike->fetch(PDO::FETCH_ASSOC);
+                            $sqljumlahlike = "SELECT COUNT(*) AS jumlah FROM likepost WHERE id_post = {$rowpost['id']}";
+                            $resultjumlahlike = $db->query($sqljumlahlike);
+                            $rowjumlahlike = $resultjumlahlike->fetch(PDO::FETCH_ASSOC);
             
-                            if($rowlike) {?>
-                                <a href="delete_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                                $sqlusernow = "SELECT * FROM user WHERE username = ?";
+                                $stmtusernow = $db->prepare($sqlusernow);
+                                $stmtusernow->execute([$_SESSION['username']]);
+                                $rowusernow = $stmtusernow->fetch(PDO::FETCH_ASSOC);
+                
+                                $sqllike = "SELECT * FROM likepost WHERE id_user = {$rowusernow['id']} AND id_post = {$rowpost['id']}";
+                                $resultlike = $db->query($sqllike);
+                                $rowlike = $resultlike->fetch(PDO::FETCH_ASSOC);
+                
+                                if($rowlike) {?>
+                                    <a href="delete_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                <?php
+                                } else if(!$rowlike) { ?>
+                                    <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                <?php
+                                }
+                                ?>
                             <?php
-                            } else if(!$rowlike) { ?>
-                                <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                            } else { ?>
+                                <a href="login.php" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
                             <?php
                             }
                             ?>
-                        <?php
-                        } else { ?>
-                            <a href="login.php" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
-                        <?php
-                        }
-                        ?>
-                    <p class="d-inline">✉️<?=$rowjumlahcomment['jumlah'] ?></p>
-                    <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
+                        <p class="d-inline">✉️<?=$rowjumlahcomment['jumlah'] ?></p>
+                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
+                    </div>
+                    <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
+                    <div class="py-auto">
+                        <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <?php
