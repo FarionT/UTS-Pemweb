@@ -1,0 +1,20 @@
+@media only screen and (max-width: 800px) {
+    .body_section {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+.section {
+    background-color:#FFFFFF;
+}
+.section:hover {
+    background-color:#F9F6F6;
+}
+
+.text-hover:hover {
+    border-bottom:2px #FFB800 solid;
+    font-weight:bold;
+}
+a {
+  color :black;
+}

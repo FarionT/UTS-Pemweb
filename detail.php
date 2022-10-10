@@ -14,13 +14,15 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NgodingCoy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body style="background-color:#D9D9D9">
-    <nav class="shadow w-100 d-flex justify-content-between py-2" style="background-color: #FFFFFF";>
-        <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
+<nav class="shadow w-100 d-flex justify-content-between py-2 section";>
+        <a href="dashboard.php" class="ms-5"><img style="width: 190px; height: 50px;" data-aos="fade-right" data-aos-duration="1000" src="img/logo.png"/></a>
         <div class="w-50 d-flex justify-content-between">
             <a href="dashboard.php" class="h3 text-body text-decoration-none mt-2">ALL</a>
             <a href="kategori.php?kategori=C" class="h3 text-body text-decoration-none mt-2">C</a>
@@ -32,10 +34,10 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
         <div class="d-flex me-5">
             <?php
             if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-                <a href="#" class="h2 text-body text-decoration-none mt-2" data-bs-toggle="modal" data-bs-target="#modal_create">Create</a>
+                <a data-aos="fade-right" data-aos-duration="1000"href="#" class="h2 text-body text-decoration-none mt-2" data-bs-toggle="modal" data-bs-target="#modal_create">Create</a>
             <?php
             } else { ?>
-                <a href="login.php" class="h2 text-body text-decoration-none mt-2">Create</a>
+                <a data-aos="fade-left" data-aos-duration="1000"href="login.php" class="h2 text-body text-decoration-none mt-2">Create</a>
             <?php
             }
             ?>
@@ -46,8 +48,8 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
-                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="rounded-circle" src=<?=$row['profile']?> style="width: 50px;"/></a>
-                <a href="profile.php?id_user_profile=<?= $row['id'] ?>" class="h2 text-body text-decoration-none mt-2"><?=$row['username']?></a>
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="rounded-circle" src=<?=$row['profile']?> data-aos="fade-down" data-aos-duration="1000"style="width: 50px;"/></a>
+                <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="h2 text-body text-decoration-none mt-2" data-aos="fade-down" data-aos-duration="1000"style="width: 50px;"><?=$row['username']?></a>
             <?php
             } else {
             ?>
@@ -67,7 +69,7 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
     $resultuser = $db->query($sqluser);
     $rowuser = $resultuser->fetch(PDO::FETCH_ASSOC);
     ?>
-    <div class="mx-auto container mt-3 col-6 pb-3" style="background-color:white">
+    <div class="mx-auto container mt-3 col-6 pb-3 section" style="box-shadow:3px 3px #FFB800;border-radius:10px">
         <div class="mx-auto d-flex justify-content-between align-middle">
         <div class="d-inline-block">
                 <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
@@ -159,8 +161,9 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
             $rowusercomment = $resultusercomment->fetch(PDO::FETCH_ASSOC);
             
             ?>
-            <div class="container col-6 mt-5 pb-2" style="background-color:white;margin-top:10px;">      
-                <div class="mx-auto d-flex justify-content-between align-middle">
+            <div class="d-flex justify-content-end col-6 pb-2 mx-auto" style="margin-top:10px;">  
+            <div class="section p-2 " style="width:90%;box-shadow: 3px 3px #FFB800;border-radius:10px">    
+                <div class=" d-flex justify-content-between">
                     <div class="d-inline-block">
                         <img src=<?=$rowusercomment['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
                         <div class="d-inline-block align-middle ">
@@ -175,7 +178,7 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
                 </div>
                 <div><?= $rowcomment['comment'] ?></div>
                 <div class="d-flex justify-content-between">
-                    <div class="d-inline-block"><br>
+                    <div class="d-block">
                     <?php
                     $sqljumlahlikecomment = "SELECT COUNT(*) AS jumlah FROM likecomment WHERE id_comment = {$rowcomment['id']}";
                     $resultjumlahlikecomment = $db->query($sqljumlahlikecomment);
@@ -192,10 +195,10 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
                         $rowlike = $resultlike->fetch(PDO::FETCH_ASSOC);
         
                         if($rowlike) {?>
-                            <a href="delete_like_comment.php?id_comment=<?= $rowcomment['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
+                            <a href="delete_like_comment.php?id_comment=<?= $rowcomment['id'] ?>" class=" text-body mt-0 text-decoration-none" style="font-size: 25px;"><img class="mt-0"src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
                         <?php
                         } else if(!$rowlike) { ?>
-                            <a href="create_like_comment.php?id_comment=<?= $rowcomment['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
+                            <a href="create_like_comment.php?id_comment=<?= $rowcomment['id'] ?>" class=" text-body mt-0 text-decoration-none" style="font-size: 25px;"><img class="mt-0" src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlikecomment['jumlah'] ?></a>
                         <?php
                         }
                         ?>
@@ -206,10 +209,12 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
                         }
                         ?>
                     </div>
-                    <div class="d-inline-block">
+                    <div class="d-block">
+                        <img src="img/x_red.png" style="height:20px;width:20px;" alt="">
                         <a class=" text-body text-decoration-none" href="delete_comment.php?id_comment=<?= $rowcomment['id']?>&id_post=<?= $rowpost['id']?>">Delete</a>
                     </div>
                 </div>
+            </div>
                 
             </div>
     <?php
@@ -252,6 +257,10 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript.js"></script>
