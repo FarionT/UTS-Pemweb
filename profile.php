@@ -133,18 +133,14 @@ $duration=500;
                 $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
                 $resultpost = $db->query($sqlpost);
                 while($rowpost = $resultpost->fetch(PDO::FETCH_ASSOC)) {
-                    $id_user = $rowpost['id_user'];
-                    $sqluser = "SELECT * FROM user WHERE id = $id_user";
-                    $resultuser = $db->query($sqluser);
-                    $rowuser = $resultuser->fetch(PDO::FETCH_ASSOC);
                 ?>
                 <div class="container col-6 pb-2 mt-3 section" data-aos="fade-up" data-aos-duration="<?=$duration?>"style=" width:100% ;box-shadow: 3px 3px #FFB800;border-radius:10px">      
                     <div class="mx-auto d-flex justify-content-between align-middle">
                         <div class="d-inline-block">
-                            <img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
+                            <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img src=<?=$row['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
                             <div class="d-inline-block align-middle ">
-                                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
-                                <p><?=$rowuser['pekerjaan']?></p>
+                                <a href="profile.php?id_user_profile=<?= $row['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $row['username'] ?> | <?= $rowpost['kategori'] ?></a>
+                                <p><?=$row['pekerjaan']?></p>
                             </div>
                         </div>
                         <div class="">
