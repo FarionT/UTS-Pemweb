@@ -160,8 +160,11 @@ $duration=500;
                         CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, 
                         LEFT(jam, 5) AS jam, 
                         id_user, 
-                        (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3 + 
-                        (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7 AS trend 
+                        CASE
+                            WHEN (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) IS NULL THEN (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7
+                            WHEN (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) IS NULL THEN (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3
+                            ELSE (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3 + (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7
+                        END AS trend
                         FROM postingan 
                         WHERE kategori = '$kategori'
                         ORDER BY trend DESC";

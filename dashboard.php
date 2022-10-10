@@ -100,9 +100,12 @@ $duration=500;
                 kategori, 
                 CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, 
                 LEFT(jam, 5) AS jam, 
-                id_user, 
-                (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3 + 
-                (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7 AS trend
+                id_user,
+                CASE
+                    WHEN (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) IS NULL THEN (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7
+                    WHEN (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) IS NULL THEN (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3
+                    ELSE (SELECT COUNT(*) FROM likepost GROUP BY id_post HAVING id_post = id ) * 0.3 + (SELECT COUNT(*) FROM comment GROUP BY id_post HAVING id_post = id ) * 0.7
+                END AS trend
                 FROM postingan
                 ORDER BY trend DESC";
     $resultpost = $db->query($sqlpost);
@@ -160,7 +163,7 @@ $duration=500;
                         ?>
                     <?php
                     } else { ?>
-                        <a href="login.php" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                        <a href="login.php" class="d-inline text-body text-decoration-none"><img src="img/heart.png" style="width: 15px;"/><p><?= $rowjumlahlike['jumlah'] ?></p></a>
                     <?php
                     }
                     ?>
