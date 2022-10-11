@@ -18,10 +18,10 @@
       align-items: center;
     }
     .kanan {
-      width:90% !important;
+      width:100% !important;
     }
     .kiri {
-      width:90% !important;
+      width:100% !important;
     }
     .nav {
       display:flex;
@@ -54,7 +54,7 @@
       width:100% !important;
     }
     .profileSectionItem {
-      width:90% !important;
+      width:100% !important;
       margin-left: auto!important;
       margin-right: auto !important;
     }

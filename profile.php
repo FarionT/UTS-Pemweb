@@ -197,7 +197,7 @@ $duration=500;
                 ?>
             </div>
             
-            <div class="kanan mt-3 d-inline-block profileSection2 mx-auto">
+            <div class="kanan mt-3 d-inline-block profileSection2 mx-0">
                 <div class="section section text-center mb-3 d-inline-block profileSectionItem2 mx-auto" style="width:100%;border: 1px solid;padding: 10px;box-shadow: 5px 5px #01D12F;border-radius:10px;border:1px #00B929 solid" data-aos="zoom-in-left" data-aos-duration="1000">
                     <p>Postingan</p>
                     <?php
@@ -285,7 +285,7 @@ $duration=500;
             </div>
         </div>
     </div>
-    <footer class="d-flex justify-content-end mt-5" style="background-color: #000000;  bottom: 0; width: 100%;">
+    <footer class="d-flex justify-content-end  mt-5 mb-0" style="background-color: #000000;  bottom: 0; width: 100%;">
         <p class="text-white mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
     </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
