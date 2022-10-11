@@ -112,7 +112,7 @@ $javascript="color:black;";
         $resultuser = $db->query($sqluser);
         $rowuser = $resultuser->fetch(PDO::FETCH_ASSOC);
     ?>
-    <div class="container col-6 pb-2 section mt-3 " style="box-shadow: 3px 3px #FFB800;border-radius:10px;" data-aos="fade-up"data-aos-duration="<?=$duration?>">      
+    <div class="container col-6 pb-2 section profileSectionItem mt-3 " style="box-shadow: 3px 3px #FFB800;border-radius:10px;" data-aos="fade-up"data-aos-duration="<?=$duration?>">      
         <div class="mx-auto d-flex justify-content-between align-middle">
             <div class="d-inline-block">
                 <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img class="rounded-circle" src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>

@@ -22,11 +22,12 @@
       visibility: hidden;
       position:fixed;
     }
-    .navScroll {
+    /* .navScroll {
       align-self: baseline;
       width:100%;
-    }
+    } */
     .profileSection {
+      width:100%;
       flex-direction: column-reverse;
     }
     .profileSection2 {
@@ -38,8 +39,8 @@
       margin-right: auto !important;
     }
     .nav-link {
-      align-self: baseline;
-      width:100%;
+      /* align-self: baseline;
+      width:100%; */
       font-size:15px !important;
     }
     .flex-category {
