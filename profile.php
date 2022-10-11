@@ -27,7 +27,7 @@ $duration=500;
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
     <a data-aos="fade-right" data-aos-duration="1000" href="dashboard.php" class="ms-5 navbar-brand logo"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
-      <ul class="navbar-nav me-auto my-lg-0 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
+      <ul class="navbar-nav me-auto my-lg-0 col-6 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
             <a href="dashboard.php?kategori=all" aria-current="page" class=" nav-link h3 text-decoration-none mt-2 text-hover" style="font-size:25px;color:black">ALL</a>
         </li>

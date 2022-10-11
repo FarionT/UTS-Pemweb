@@ -46,7 +46,7 @@ $duration=500;
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
     <a data-aos="fade-right" data-aos-duration="1000" href="dashboard.php" class="ms-5 navbar-brand logo"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
-      <ul class="navbar-nav me-auto my-lg-0 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
+      <ul class="navbar-nav me-auto my-lg-0 col-6 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
             <a href="dashboard.php" aria-current="page" class=" nav-link h3 text-decoration-none mt-2 text-hover" style="font-size:25px;color:black;">ALL</a>
         </li>
@@ -118,11 +118,11 @@ $duration=500;
                 <?php
                 } else if($_GET['kategori'] == "Java") {
                 ?>
-                    <img src="img/java.png" class="mx-auto "data-aos="zoom-in category-img" data-aos-duration="1000" style="width:200px;"/>
+                    <img src="img/java.png" class="mx-auto category-img "data-aos="zoom-in category-img" data-aos-duration="1000" style="width:200px;"/>
                 <?php
                 } else if($_GET['kategori'] == "Javascript") {
                 ?>
-                    <img src="img/javascript.png" class="mx-auto"data-aos="zoom-in category-img" data-aos-duration="1000" style="width:200px;"/>
+                    <img src="img/javascript.png" class="mx-auto category-img"data-aos="zoom-in category-img" data-aos-duration="1000" style="width:200px;"/>
                 <?php
                 }
                 ?>
