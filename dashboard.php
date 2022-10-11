@@ -143,7 +143,7 @@ $duration=500;
                     $resultjumlahlike = $db->query($sqljumlahlike);
                     $rowjumlahlike = $resultjumlahlike->fetch(PDO::FETCH_ASSOC);
 
-                    if(isset($_SESSION['username']) && !empty($_SESSION['username']) && $_SESSION['user_role'] == "user") {
+                    if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                         $sqlusernow = "SELECT * FROM user WHERE username = ?";
                         $stmtusernow = $db->prepare($sqlusernow);
                         $stmtusernow->execute([$_SESSION['username']]);
