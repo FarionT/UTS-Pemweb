@@ -94,7 +94,7 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
     $resultuser = $db->query($sqluser);
     $rowuser = $resultuser->fetch(PDO::FETCH_ASSOC);
     ?>
-    <div class="mx-auto container mt-3 col-6 pb-3 section" style="box-shadow:3px 3px #FFB800;border-radius:10px">
+    <div class="mx-auto container mt-3 col-6 pb-3 section" data-aos="fade-up" data-aos-duration="1000" style="box-shadow:3px 3px #FFB800;border-radius:10px">
         <div class="mx-auto d-flex justify-content-between align-middle">
         <div class="d-inline-block">
                 <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img class="rounded-circle" src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
@@ -187,7 +187,7 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
             
             ?>
             <div class="d-flex justify-content-end col-6 pb-2 mx-auto" style="margin-top:10px;">  
-            <div class="section p-2 " style="width:90%;box-shadow: 3px 3px #FFB800;border-radius:10px">    
+            <div class="section p-2 " data-aos="fade-up" data-aos-duration="1000" style="width:90%;box-shadow: 3px 3px #FFB800;border-radius:10px">    
                 <div class=" d-flex justify-content-between">
                     <div class="d-inline-block">
                         <img class="rounded-circle"src=<?=$rowusercomment['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt="">
