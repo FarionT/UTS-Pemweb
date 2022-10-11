@@ -83,7 +83,7 @@ $duration=500;
     </div>
   </div>
 </nav>    
-    <div class="d-flex flex-column col-9 justify-content-center mx-auto">
+    <div class="d-flex flex-column col-9 justify-content-center mx-auto body-section">
         <div class="mt-2 bg-img p-5 d-flex rounded" data-aos="zoom-in-left" data-aos-duration="1000"style=" height:200px;background-image:url('img/Group 14.png');background-size: 1300px 200px;border-radius:20px;border:3px white solid;">
             <?php
             if(isset($_GET['id_user_profile']) && !empty($_GET['id_user_profile'])) {
@@ -120,7 +120,7 @@ $duration=500;
             </div>
         </div>
         <div class="d-flex profileSection justify-content-between" >
-            <div id="kiri" class="d-inline-block profileSection2" style="width:70%">
+            <div class="kiri d-block profileSection2">
                 <?php
                 $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
                 $resultpost = $db->query($sqlpost);
@@ -197,7 +197,7 @@ $duration=500;
                 ?>
             </div>
             
-            <div id="kanan" class="mt-3 d-inline-block profileSection2 mx-auto" style="width:25%">
+            <div class="kanan mt-3 d-inline-block profileSection2 mx-auto">
                 <div class="section section text-center mb-3 d-inline-block profileSectionItem2 mx-auto" style="width:100%;border: 1px solid;padding: 10px;box-shadow: 5px 5px #01D12F;border-radius:10px;border:1px #00B929 solid" data-aos="zoom-in-left" data-aos-duration="1000">
                     <p>Postingan</p>
                     <?php

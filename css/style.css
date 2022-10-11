@@ -1,7 +1,27 @@
 @media only screen and (max-width: 990px) {
+    .login-form {
+      width :90% !important;
+    }
+    .login-description {
+      width:90% !important;
+    }
+    .login-img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .body-login {
+      flex-direction: column;
+      align-items: center;
+    }
     .body_section {
       flex-direction: column;
       align-items: center;
+    }
+    .kanan {
+      width:90% !important;
+    }
+    .kiri {
+      width:90% !important;
     }
     .nav {
       display:flex;
@@ -31,7 +51,7 @@
       flex-direction: column-reverse;
     }
     .profileSection2 {
-      width:100%;
+      width:100% !important;
     }
     .profileSectionItem {
       width:90% !important;
@@ -57,15 +77,20 @@
       width:65%!important;
     }
 }
-
+.login-form {
+  width:35%;
+}
+.login-description {
+  width:25%;
+}
 .nav-link {
   font-size:25px;
 }
 .kiri {
-  width:70% !important;
+  width:70%;
 }
 .kanan {
-  width :25% !important;
+  width :25%; 
 }
 .section {
     background-color:#FFFFFF;
