@@ -76,14 +76,15 @@ $javascript="color:black;";
             ?>
                 <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="align-middle rounded-circle " src=<?=$row['profile']?> style="width: 50px;"/></a>
                 <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="align-middle h2 text-body text-decoration-none text-gradient"><?=$row['username']?></a>
-            </div>
+            
             <?php
             } else {
             ?>
-            <a href="login.php" class="h2 text-body text-decoration-none mt-2 text-gradient">Log In</a>
+                <a href="login.php" class="h2 text-gradient text-decoration-none d-block align-middle glow-on-hover">Log In</a>
             <?php
             }
             ?>
+            </div>
         </div>
       
     </div>
@@ -154,21 +155,17 @@ $javascript="color:black;";
                             <a href="delete_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body align-middle text-decoration-none" style="font-size: 20px;"><img src="img/red_heart.png" class="align-middle img-hover" style="width:25px;height:25px" alt=""> <?= $rowjumlahlike['jumlah'] ?></a>
                         <?php
                         } else if(!$rowlike) { ?>
-                            <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body align-middle text-decoration-none" style="font-size: 20px;"><img src="img/heart.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?= $rowjumlahlike['jumlah'] ?></a>
+                            <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body align-middle text-decoration-none" style="font-size: 20px;"><img src="img/heart.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px" alt=""> <?= $rowjumlahlike['jumlah'] ?></a>
                         <?php
                         }
                         ?>
                     <?php
                     } else { ?>
-<<<<<<< HEAD
                         <a href="login.php" class="d-inline text-body text-decoration-none align-middle" style="font-size: 20px;"><img src="img/heart.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?= $rowjumlahlike['jumlah'] ?></a>
-=======
-                        <a href="login.php" class="d-inline text-body text-decoration-none"><img src="img/heart.png" style="width: 15px;"/><p><?= $rowjumlahlike['jumlah'] ?></p></a>
->>>>>>> b488a0b242ad808895c5f9c37b0fdcfaf95a7904
                     <?php
                     }
                     ?>
-                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="d-inline align-middle text-decoration-none" style="font-size:20px;color:black;"><img src="img/chat-bubble.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?=$rowjumlahcomment['jumlah'] ?></a>
+                <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-decoration-none align-middle" style="font-size:20px;color:black;"><img src="img/chat-bubble.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?=$rowjumlahcomment['jumlah'] ?></a>
                 <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none align-middle"style="font-size:25px">&nbsp; Detail</a>
             </div>
             <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>

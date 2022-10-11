@@ -88,14 +88,15 @@ $duration=500;
             ?>
                 <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="align-middle rounded-circle " src=<?=$row['profile']?> style="width: 50px;"/></a>
                 <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="align-middle h2 text-body text-decoration-none text-gradient"><?=$row['username']?></a>
-            </div>
+            
             <?php
             } else {
             ?>
-            <a href="login.php" class="h2 text-body text-decoration-none mt-2 text-gradient">Log In</a>
+            <a href="login.php" class="h2 text-gradient text-decoration-none d-block align-middle glow-on-hover">Log In</a>
             <?php
             }
             ?>
+            </div>
         </div>
       
     </div>
@@ -180,8 +181,8 @@ $duration=500;
                 </div>
                 <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
                 <div><?= $rowpost['konten'] ?></div>
-                <div class="d-flex justify-content-between">
-                    <div><br>
+                <div class="d-flex justify-content-between mt-3">
+                    <div >
                         <?php
                             $sqljumlahcomment = "SELECT COUNT(*) AS jumlah FROM comment WHERE id_post = {$rowpost['id']}";
                             $resultjumlahcomment = $db->query($sqljumlahcomment);
@@ -215,13 +216,14 @@ $duration=500;
                             <?php
                             }
                             ?>
-                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="d-inline align-middle text-decoration-none" style="font-size:20px;color:black"><img src="img/chat-bubble.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?=$rowjumlahcomment['jumlah'] ?></a>
-                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none align-middle"style="font-size:25px">&nbsp; Detail</a>
-                    </div>
+                            <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="d-inline align-middle text-decoration-none" style="font-size:20px;color:black"><img src="img/chat-bubble.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?=$rowjumlahcomment['jumlah'] ?></a>
+                            <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none align-middle"style="font-size:25px">&nbsp; Detail</a>
+                        
+                        </div>
                     <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
-                    <div class="py-auto">
-                        <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
-                    </div>
+                        <div class="py-auto">
+                            <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
+                        </div>
                     <?php } ?>
                 </div>
             </div>

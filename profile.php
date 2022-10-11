@@ -29,22 +29,22 @@ $duration=500;
     <a data-aos="fade-right" data-aos-duration="1000" href="dashboard.php" class="ms-5 navbar-brand logo"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
       <ul class="navbar-nav me-auto my-lg-0 col-6 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-            <a href="dashboard.php?kategori=all" aria-current="page" class=" nav-link h3 text-decoration-none mt-2 text-hover" style="font-size:25px;color:black">ALL</a>
+            <a href="dashboard.php?kategori=all" aria-current="page" class=" nav-link nav-scroll h3 text-decoration-none mt-2 text-hover" style="color:black;font-size:25px">ALL</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=C" class=" nav-link h2 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">C</a>
+            <a href="kategori.php?kategori=C" class=" nav-link text-decoration-none mt-2 text-hover"style="color:black;font-size:25px">C</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=PHP" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">PHP</a>
+            <a href="kategori.php?kategori=PHP" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px">PHP</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=Python" class= " nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">Python</a>
+            <a href="kategori.php?kategori=Python" class= " nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px">Python</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=Java" class=" nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">Java</a>
+            <a href="kategori.php?kategori=Java" class=" nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px">Java</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=Javascript" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">Javascript</a>
+            <a href="kategori.php?kategori=Javascript" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px">Javascript</a>
         </li>
 
 
@@ -69,19 +69,20 @@ $duration=500;
             ?>
                 <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="align-middle rounded-circle " src=<?=$row['profile']?> style="width: 50px;"/></a>
                 <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="align-middle h2 text-body text-decoration-none text-gradient"><?=$row['username']?></a>
-            </div>
+            
             <?php
             } else {
             ?>
-            <a href="login.php" class="h2 text-body text-decoration-none mt-2 text-gradient">Log In</a>
+                <a href="login.php" class="h2 text-gradient text-decoration-none d-block align-middle glow-on-hover">Log In</a>
             <?php
             }
             ?>
+            </div>
         </div>
       
     </div>
   </div>
-</nav>   
+</nav>    
     <div class="d-flex flex-column col-9 justify-content-center mx-auto">
         <div class="mt-2 bg-img p-5 d-flex rounded" data-aos="zoom-in-left" data-aos-duration="1000"style=" height:200px;background-image:url('img/Group 14.png');background-size: 1300px 200px;border-radius:20px;border:3px white solid;">
             <?php
@@ -119,7 +120,7 @@ $duration=500;
             </div>
         </div>
         <div class="d-flex profileSection justify-content-between" >
-            <div id="kiri" class="d-inline-block profileSection2">
+            <div id="kiri" class="d-inline-block profileSection2" style="width:70%">
                 <?php
                 $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id_user = {$row['id']}";
                 $resultpost = $db->query($sqlpost);
@@ -140,8 +141,8 @@ $duration=500;
                     </div>
                     <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-decoration-none" style="color:black"><b><?= $rowpost['subject'] ?></b></a>
                     <div><?= $rowpost['konten'] ?></div>
-                    <div class="d-flex justify-content-between">
-                        <div><br>
+                    <div class="d-flex justify-content-between mt-3">
+                        <div>
                             <?php
                                 $sqljumlahcomment = "SELECT COUNT(*) AS jumlah FROM comment WHERE id_post = {$rowpost['id']}";
                                 $resultjumlahcomment = $db->query($sqljumlahcomment);
@@ -196,7 +197,7 @@ $duration=500;
                 ?>
             </div>
             
-            <div id="kanan" class="mt-3 d-inline-block profileSection2 mx-auto">
+            <div id="kanan" class="mt-3 d-inline-block profileSection2 mx-auto" style="width:25%">
                 <div class="section section text-center mb-3 d-inline-block profileSectionItem2 mx-auto" style="width:100%;border: 1px solid;padding: 10px;box-shadow: 5px 5px #01D12F;border-radius:10px;border:1px #00B929 solid" data-aos="zoom-in-left" data-aos-duration="1000">
                     <p>Postingan</p>
                     <?php
