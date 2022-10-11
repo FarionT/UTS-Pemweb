@@ -39,70 +39,60 @@ $duration=500;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body style="background-color:#D9D9D9">
-
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg" style="background-color:white">
   <div class="container-fluid">
-  <a data-aos="fade-right" data-aos-duration="1000" href="dashboard.php" class="ms-5 navbar-brand"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll d-flex justify-content-between mx-auto col-6" style="--bs-scroll-height: 100px;">
+    <a data-aos="fade-right" data-aos-duration="1000" href="dashboard.php" class="ms-5 navbar-brand logo"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
+      <ul class="navbar-nav me-auto my-lg-0 col-6 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-            <a href="dashboard.php" aria-current="page" class=" nav-link h3 text-body text-decoration-none mt-2 text-hover" style="font-size:25px;">ALL</a>
+            <a href="dashboard.php" aria-current="page" class=" nav-link h3 text-decoration-none mt-2 text-hover" style="font-size:25px;color:black;">ALL</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=C" class=" nav-link h2  text-decoration-none mt-2 text-hover"style="<?=$c?>font-size:25px;">C</a>
+            <a href="kategori.php?kategori=C" class=" nav-link h2 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;<?=$c?>">C</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=PHP" class="nav-link h3 text-decoration-none mt-2 text-hover"style="<?=$php?>font-size:25px;">PHP</a>
+            <a href="kategori.php?kategori=PHP" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;<?=$php?>">PHP</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=Python" class= " nav-link h3 text-decoration-none mt-2 text-hover"style="<?=$python?>font-size:25px;">Python</a>
+            <a href="kategori.php?kategori=Python" class= " nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;<?=$python?>">Python</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=Java" class=" nav-link h3 text-decoration-none mt-2 text-hover"style="<?=$java?>font-size:25px;">Java</a>
+            <a href="kategori.php?kategori=Java" class=" nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;<?=$java?>">Java</a>
         </li>
         <li class="nav-item">
-            <a href="kategori.php?kategori=Javascript" class="nav-link h3 text-decoration-none mt-2 text-hover"style="<?=$javascript?>font-size:25px;">Javascript</a>
+            <a href="kategori.php?kategori=Javascript" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;<?=$javascript?>">Javascript</a>
         </li>
 
-        <li class="nav-item dropdown">
-          
-          <ul class="dropdown-menu">
-            <li><a href="dashboard.php" class="h3 text-body text-decoration-none mt-2 text-hover">ALL</a></li>
-            <li><a href="kategori.php?kategori=C" class="h3  text-decoration-none mt-2 text-hover"style="<?=$c?>">C</a></li>
-            <li><a href="kategori.php?kategori=PHP" class="h3 text-decoration-none mt-2 text-hover"style="<?=$php?>">PHP</a></li>
-            <li><a href="kategori.php?kategori=Python" class="h3 text-decoration-none mt-2 text-hover"style="<?=$python?>">Python</a></li>
-            <li><a href="kategori.php?kategori=Java" class="h3 text-decoration-none mt-2 text-hover"style="<?=$java?>">Java</a></li>
-            <li><a href="kategori.php?kategori=Javascript" class="h3 text-decoration-none mt-2 text-hover"style="<?=$javascript?>">Javascript</a></li>
-          </ul>
-        </li>
+
       </ul>
       <div class="d-flex me-5">
+        <div class="profile d-flex my-auto align-middle"  data-aos="fade-down" data-aos-duration="1000">
             <?php
-            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-                <a data-aos="fade-right" data-aos-duration="1000" href="#" class="h2 text-body text-decoration-none mt-2" data-bs-toggle="modal" data-bs-target="#modal_create">Create</a>
+            if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?> 
+                <a data-aos="fade-right" data-aos-duration="1000" href="#" class="h2 text-body text-decoration-none d-block align-middle text-gradient" data-bs-toggle="modal" data-bs-target="#modal_create">Create</a>
             <?php
             } else { ?>
-                <a data-aos="fade-right" data-aos-duration="1000" href="login.php" class="h2 text-body text-decoration-none mt-2">Create</a>
+                <a data-aos="fade-right" data-aos-duration="1000" href="login.php" class="h2 text-body text-decoration-none d-block align-middle text-gradient">Create</a>
             <?php
             }
             ?>
-            <h2 class="mt-2">&nbsp;|&nbsp;</h2>
+            <h2 class="">&nbsp;|&nbsp;</h2>
             <?php
             if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
                 $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
                 $result = $db->query($sqlprofile);
                 $row = $result->fetch(PDO::FETCH_ASSOC);
             ?>
-                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="rounded-circle" src=<?=$row['profile']?> data-aos="fade-down" data-aos-duration="1000"style="width: 50px;"/></a>
-                <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="h2 text-body text-decoration-none mt-2" data-aos="fade-down" data-aos-duration="1000"style="width: 50px;"><?=$row['username']?></a>
-            
+                <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="align-middle rounded-circle " src=<?=$row['profile']?> style="width: 50px;"/></a>
+                <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="align-middle h2 text-body text-decoration-none text-gradient"><?=$row['username']?></a>
+            </div>
             <?php
             } else {
             ?>
-            <a href="login.php" class="h2 text-body text-decoration-none mt-2">Log In</a>
+            <a href="login.php" class="h2 text-body text-decoration-none mt-2 text-gradient">Log In</a>
             <?php
             }
             ?>
@@ -110,36 +100,35 @@ $duration=500;
       
     </div>
   </div>
-</nav>
-
+</nav>    
     <div class="d-flex justify-content-start body_section" >
-        <div class="d-block mt-0 col-3 d-flex flex-column">
+        <div class="d-block mt-3 col-3 d-flex flex-category">
             <div class="mx-auto">
                 <?php
                 $kategori = $_GET['kategori'];
                 if($_GET['kategori'] == "C") {?>
-                    <img src="img/c.png" class="mx-auto" data-aos="zoom-in" data-aos-duration="1000" style="width:200px;height:auto"/>
+                    <img src="img/c.png" class="mx-auto category-img" data-aos="zoom-in" data-aos-duration="1000" style="width:200px;height:auto"/>
                 <?php
                 } else if($_GET['kategori'] == "PHP") {?>
-                    <img src="img/php.png" class="mx-auto"data-aos="zoom-in" data-aos-duration="1000" style="width:200px;height:auto"/>
+                    <img src="img/php.png" class="mx-auto category-img"data-aos="zoom-in" data-aos-duration="1000" style="width:200px;height:auto"/>
                 <?php
                 } else if($_GET['kategori'] == "Python") {
                 ?>
-                    <img src="img/python.png" class="mx-auto"data-aos="zoom-in" data-aos-duration="1000" style="width:200px;height:auto"/>
+                    <img src="img/python.png" class="mx-auto category-img"data-aos="zoom-in" data-aos-duration="1000" style="width:200px;height:auto"/>
                 <?php
                 } else if($_GET['kategori'] == "Java") {
                 ?>
-                    <img src="img/java.png" class="mx-auto"data-aos="zoom-in" data-aos-duration="1000" style="width:200px;"/>
+                    <img src="img/java.png" class="mx-auto category-img "data-aos="zoom-in category-img" data-aos-duration="1000" style="width:200px;"/>
                 <?php
                 } else if($_GET['kategori'] == "Javascript") {
                 ?>
-                    <img src="img/javascript.png" class="mx-auto"data-aos="zoom-in" data-aos-duration="1000" style="width:200px;"/>
+                    <img src="img/javascript.png" class="mx-auto category-img"data-aos="zoom-in category-img" data-aos-duration="1000" style="width:200px;"/>
                 <?php
                 }
                 ?>
             </div>
-            <div id="kategori_kiri" class="section mx-auto" style="width:200px;">
-                <div  class="text-center ">
+            <div id="kategori_kiri" class=" mx-auto category-post section" style="width:200px;box-shadow: 5px 5px red;border-radius:10px;">
+                <div  class="text-center">
                     <p>Postingan</p>
                     <?php
                     $sqlpostingan = "SELECT COUNT(*) as jumlah FROM postingan WHERE kategori = '$kategori'";
@@ -150,7 +139,7 @@ $duration=500;
                 </div>
             </div>
         </div>
-        <div class="d-block col-6">
+        <div class="d-block col-6 profileSectionItem">
             <?php
             $sqlpost = "SELECT 
                         id,
@@ -178,7 +167,7 @@ $duration=500;
             <div class="d-flex flex-column p-2 mx-auto section mt-3" data-aos="fade-up" data-aos-duration="<?=$duration?>"style="box-shadow: 3px 3px #FFB800;border-radius:10px;">      
                 <div class="d-flex justify-content-between align-middle" >
                     <div class="d-inline-block">
-                    <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
+                    <a href="profile.php?id_user_profile=<?= $rowuser['id'] ?>"><img class="rounded-circle"src=<?=$rowuser['profile']?> style="width:60px;height:60px;" class="d-inline-block my-auto"alt=""></a>
                         <div class="d-inline-block align-middle ">
                             <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="fs-3 text-decoration-none" style="color:black"><?= $rowuser['username'] ?> | <?= $rowpost['kategori'] ?></a>
                             <p><?=$rowuser['pekerjaan']?></p>
@@ -213,21 +202,21 @@ $duration=500;
                                 $rowlike = $resultlike->fetch(PDO::FETCH_ASSOC);
                 
                                 if($rowlike) {?>
-                                    <a href="delete_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart_red.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                    <a href="delete_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body align-middle text-decoration-none" style="font-size: 20px;"><img src="img/red_heart.png" class="align-middle img-hover" style="width:25px;height:25px" alt=""> <?= $rowjumlahlike['jumlah'] ?></a>
                                 <?php
                                 } else if(!$rowlike) { ?>
-                                    <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                    <a href="create_like_post.php?id_post=<?= $rowpost['id'] ?>" class="d-inline text-body align-middle text-decoration-none" style="font-size: 20px;"><img src="img/heart.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?= $rowjumlahlike['jumlah'] ?></a>
                                 <?php
                                 }
                                 ?>
                             <?php
                             } else { ?>
-                                <a href="login.php" class="d-inline text-body text-decoration-none" style="font-size: 25px;"><img src="img/heart.png" style="width: 15px;"/><?= $rowjumlahlike['jumlah'] ?></a>
+                                <a href="login.php" class="d-inline text-body text-decoration-none align-middle" style="font-size: 20px;"><img src="img/heart.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?= $rowjumlahlike['jumlah'] ?></a>
                             <?php
                             }
                             ?>
-                        <p class="d-inline">✉️<?=$rowjumlahcomment['jumlah'] ?></p>
-                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none">&nbsp; Detail</a>
+                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="d-inline align-middle text-decoration-none" style="font-size:20px;color:black"><img src="img/chat-bubble.png" alt=""  class="align-middle img-hover" style="width:25px;height:25px"> <?=$rowjumlahcomment['jumlah'] ?></a>
+                        <a href="detail.php?id_post=<?= $rowpost['id'] ?>" class="text-body text-decoration-none align-middle"style="font-size:25px">&nbsp; Detail</a>
                     </div>
                     <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
                     <div class="py-auto">
