@@ -222,7 +222,7 @@ $duration=500;
                         </div>
                     <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
                         <div class="py-auto">
-                            <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
+                            <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" ><img src="img/x_red.png" style="height:20px;width:20px;" alt="">Delete</a>
                         </div>
                     <?php } ?>
                 </div>
@@ -276,9 +276,19 @@ $duration=500;
             </div>
         </div>
     </div>
-    <footer class="d-flex justify-content-end" style="background-color: #000000; position: fixed;  bottom: 0; width: 100%;">
+    <?php
+        if($rowpostingan['jumlah'] > 2) { ?>
+            <footer class="d-flex justify-content-end mt-5" style="background-color: #000000;  bottom: 0; width: 100%;">
+                <p class="text-white mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
+            </footer>
+    <?php
+        } else { ?>
+        <footer class="d-flex justify-content-end" style="background-color: #000000; position: fixed;  bottom: 0; width: 100%;">
         <p class="text-white mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
     </footer>
+    <?php
+        }
+    ?>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();

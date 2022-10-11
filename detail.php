@@ -151,7 +151,7 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
             </div>
             <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
             <div class="py-auto">
-                <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
+                <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" ><img src="img/x_red.png" style="height:20px;width:20px;" alt="">Delete</a>
             </div>
             <?php } ?>
         </div>
@@ -234,10 +234,13 @@ if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION[
                         }
                         ?>
                     </div>
-                    <div class="d-block">
-                        <img src="img/x_red.png" style="height:20px;width:20px;" alt="">
-                        <a class=" text-body text-decoration-none" href="delete_comment.php?id_comment=<?= $rowcomment['id']?>&id_post=<?= $rowpost['id']?>">Delete</a>
-                    </div>
+                    <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
+                        <div class="d-block">
+                            <a class=" text-body text-decoration-none" href="delete_comment.php?id_comment=<?= $rowcomment['id']?>&id_post=<?= $rowpost['id']?>"><img src="img/x_red.png" style="height:20px;width:20px;" alt="">Delete</a>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
                 

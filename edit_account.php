@@ -10,7 +10,7 @@ require_once('db.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>NgodingCoy</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
@@ -80,7 +80,7 @@ require_once('db.php');
 </nav>   
     <div class="container">
         <div class="d-flex flex-column align-items-center p-3 mt-4 mx-auto mb-5" style="width:60%; background-color: #F2F2F2; border: 1px solid #FFB800;border-bottom: 5px solid #FFB800; border-right: 5px solid #FFB800; border-radius: 15px;">
-            <img src="<?= $row['profile']?>" style="width:100px;height:auto" class="my-4"/>
+            <img src="<?= $row['profile']?>" style="width:100px;height:auto" class="my-4 rounded-circle"/>
             <form action="edit_account_process.php" method="post" class="d-flex flex-column"enctype="multipart/form-data">
                 <input value="<?= $row['id']?>" name="id" hidden/>
                 <input value="<?= $row['profile']?>" name="profile" hidden/>

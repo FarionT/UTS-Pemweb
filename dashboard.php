@@ -170,7 +170,7 @@ $javascript="color:black;";
             </div>
             <?php if(isset($_SESSION['user_role']) && !empty($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") { ?>
             <div class="py-auto">
-                <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" >Delete</a>
+                <a href="delete_post.php?id_post=<?= $rowpost['id']?>" class="mt-5 text-body text-decoration-none" ><img src="img/x_red.png" style="height:20px;width:20px;" alt="">Delete</a>
             </div>
             <?php } ?>
         </div>

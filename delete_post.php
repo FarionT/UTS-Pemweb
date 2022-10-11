@@ -200,12 +200,12 @@ if(isset($_POST['post_id'])){
     </div>
     
     
-    <div class="container text-center bg-white col-6 my-5 p-2">
+    <div class="container text-center bg-white col-6 my-5 p-2" style="border-radius: 15px;" data-aos="fade-up" data-aos-duration="1300">
         <h3>Are you sure to delete this post?</h3>  
         <div class="">
             <form action="delete_post.php" method="post" class="d-inline-block">
                 <input hidden name="post_id" value='<?= $rowpost['id']?>' />
-                <button class="btn btn-primary" >Yes</button>
+                <button class="btn btn-danger" >Yes</button>
             </form>
             <button class="btn btn-primary" onclick="history.back()">No</button>
             
@@ -247,6 +247,9 @@ if(isset($_POST['post_id'])){
             </div>
         </div>
     </div>
+    <footer class="d-flex justify-content-end" style="background-color: #000000; position: fixed;  bottom: 0; width: 100%;">
+        <p class="text-white mt-2 mb-3 me-5">Site design/logo by ©Ngoding Coy 2022 Inc</p>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript.js"></script>

@@ -279,7 +279,7 @@ if(isset($_POST['comment_id'])){
     ?>
 </div>
     
-    <div class="container text-center bg-white col-6 my-5 p-2" data-aos="fade-up" data-aos-duration="1300">
+    <div class="container text-center bg-white col-6 my-5 p-2" style="border-radius: 15px;" data-aos="fade-up" data-aos-duration="1300">
         <h3>Are you sure to delete this comment?</h3>  
         <div class="">
             <form action="delete_comment.php" method="post" class="d-inline-block">

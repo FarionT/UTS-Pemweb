@@ -18,7 +18,7 @@ $password = $_POST['password'];
 $profile = $_POST['profile'];
 
 var_dump($_FILES);
-if(isset($_FILES['profile2']) && !empty($_FILES['profile2'])) {
+if($_FILES['profile']['name'] != "") {
     $filename = $_FILES['profile2']['name'];
     $temp_file = $_FILES['profile2']['tmp_name'];
 
@@ -38,7 +38,7 @@ if(isset($_FILES['profile2']) && !empty($_FILES['profile2'])) {
             move_uploaded_file($temp_file, "profile/{$filename}");
             break;
         default: 
-            header('location: edit_accout.php');
+            header('location: edit_account.php');
             die();
     }
     $profile = "profile/{$filename}";
@@ -83,4 +83,4 @@ else {
 }
 
 
-header('location: edit_account.php');
+header('location: profile.php?id_user_profile='.$id);
