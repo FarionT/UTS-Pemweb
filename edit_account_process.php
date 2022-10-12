@@ -17,7 +17,6 @@ $tanggallahir = $_POST['tanggallahir'];
 $password = $_POST['password'];
 $profile = $_POST['profile'];
 
-var_dump($_FILES);
 if($_FILES['profile']['name'] != "") {
     $filename = $_FILES['profile2']['name'];
     $temp_file = $_FILES['profile2']['tmp_name'];
@@ -42,12 +41,10 @@ if($_FILES['profile']['name'] != "") {
             die();
     }
     $profile = "profile/{$filename}";
-    //$profile = $profile2;
 }
-// else {
-//     $profile = $profile;
-// }
-var_dump($profile);
+else {
+    $profile = $_POST['profile'];
+}
 
 $en_pass = password_hash($password, PASSWORD_BCRYPT);
 

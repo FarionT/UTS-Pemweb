@@ -45,7 +45,7 @@ else {
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_role'] = $row['role'];
-        header('location: dashboard.php');
+        header('location: index.php');
         die();
     }
 }

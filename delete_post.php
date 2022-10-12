@@ -38,7 +38,7 @@ if(isset($_POST['post_id'])){
     $result4 = $db->prepare($query4);
     $result4->execute([$post_id]);
     
-    header("Location: dashboard.php");
+    header("Location: index.php");
 }
 ?>
 
@@ -56,70 +56,7 @@ if(isset($_POST['post_id'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body style="background-color:#D9D9D9">
-<nav class="navbar navbar-expand-lg" style="background-color:white">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-    <a data-aos="fade-right" data-aos-duration="1000" href="dashboard.php" class="ms-5 navbar-brand logo"><img style="width: 190px; height: 50px;" src="img/logo.png"/></a>
-      <ul class="navbar-nav me-auto my-lg-0 col-6 navScroll navbar-nav-scroll d-flex justify-content-between mx-auto" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-            <a href="dashboard.php?kategori=all" aria-current="page" class=" nav-link h3 text-decoration-none mt-2 text-hover" style="font-size:25px;color:black">ALL</a>
-        </li>
-        <li class="nav-item">
-            <a href="kategori.php?kategori=C" class=" nav-link h2 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">C</a>
-        </li>
-        <li class="nav-item">
-            <a href="kategori.php?kategori=PHP" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">PHP</a>
-        </li>
-        <li class="nav-item">
-            <a href="kategori.php?kategori=Python" class= " nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">Python</a>
-        </li>
-        <li class="nav-item">
-            <a href="kategori.php?kategori=Java" class=" nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">Java</a>
-        </li>
-        <li class="nav-item">
-            <a href="kategori.php?kategori=Javascript" class="nav-link h3 text-decoration-none mt-2 text-hover"style="color:black;font-size:25px;">Javascript</a>
-        </li>
-
-
-      </ul>
-      <div class="d-flex me-5">
-        <div class="profile d-flex my-auto align-middle"  data-aos="fade-down" data-aos-duration="1000">
-                <?php
-                if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { ?>
-                    <a data-aos="fade-right" data-aos-duration="1000" href="#" class="h2 text-body text-decoration-none d-block align-middle text-gradient" data-bs-toggle="modal" data-bs-target="#modal_create">Create</a>
-                <?php
-                } else { ?>
-                    <a data-aos="fade-right" data-aos-duration="1000" href="login.php" class="h2 text-body text-decoration-none d-block align-middle text-gradient">Create</a>
-                <?php
-                }
-                ?>
-                <h2 class="">&nbsp;|&nbsp;</h2>
-                <?php
-                if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { 
-                    $sqlprofile = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
-                    $result = $db->query($sqlprofile);
-                    $row = $result->fetch(PDO::FETCH_ASSOC);
-                ?>
-                    <a href="profile.php?id_user_profile=<?= $row['id'] ?>"><img class="align-middle rounded-circle " src=<?=$row['profile']?> style="width: 50px;"/></a>
-                    <a  href="profile.php?id_user_profile=<?= $row['id'] ?>" class="align-middle h2 text-body text-decoration-none text-gradient"><?=$row['username']?></a>
-            
-                <?php
-                } else {
-                ?>
-                    <a href="login.php" class="h2 text-body text-decoration-none d-block align-middle text-gradient">Log In</a>
-                <?php
-                }
-                ?>
-            </div>
-        </div>
-      
-    </div>
-  </div>
-</nav> 
-
+    <?php require_once('navbar.php'); ?>
     <?php
     $id_post = $_GET['id_post'];
     $sqlpost = "SELECT id, subject, konten, kategori, CONCAT(DAY(tanggal), ' ', MONTHNAME(tanggal), ' ', YEAR(tanggal)) AS tanggal, LEFT(jam, 5) AS jam, id_user FROM postingan WHERE id = {$id_post}";

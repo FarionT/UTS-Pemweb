@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2022 at 07:21 AM
+-- Generation Time: Oct 12, 2022 at 10:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -43,7 +43,9 @@ CREATE TABLE `comment` (
 INSERT INTO `comment` (`id`, `comment`, `tanggal`, `jam`, `id_post`, `id_user`) VALUES
 (1, 'manteb bang kevin', '2022-10-09', '09:56:15', 1, 4),
 (3, 'okee siap', '2022-10-09', '11:15:11', 1, 5),
-(4, 'dapat hubungi saya jika ada pertanyaan', '2022-10-09', '11:21:02', 4, 5);
+(4, 'dapat hubungi saya jika ada pertanyaan', '2022-10-09', '11:21:02', 4, 5),
+(7, 'test', '2022-10-11', '04:32:43', 4, 1),
+(8, 'manteb', '2022-10-11', '04:33:11', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +137,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`, `namadepan`, `namabelakang`, `pekerjaan`, `email`, `tanggallahir`, `role`, `tanggalban`, `profile`) VALUES
 (1, 'admin', '$2y$10$Ushco4PQRYEmPV/o7WLtbOmHw0bjw.4AN8Oo3fi5kG8uy8/gotv2a', 'admin', NULL, 'Admin NgodingCoy', 'ngoding.coy@gmail.com', '2022-10-07', 'admin', NULL, 'profile/admin.png'),
-(3, 'kevin', '$2y$10$Hx45In5F6QNykv3ae3U.GucPIc5aZ3bLhaRWBlKPMu44iNgn1BmTy', 'Kevin', 'Andreli', 'Meminta Maaf', 'kevin.andreli@gmail.com', '2003-11-19', 'user', NULL, 'profile/conan.jpg'),
+(3, 'kevin', '$2y$10$Hx45In5F6QNykv3ae3U.GucPIc5aZ3bLhaRWBlKPMu44iNgn1BmTy', 'Kevin', 'Andrelia', 'Meminta Maaf', 'kevin.andreli@gmail.com', '2003-11-19', 'user', NULL, 'profile/conan.jpg'),
 (4, 'yoga', '$2y$10$WyAR9J1xb4wIP3xE66KTDO3GpCmPDcR4tFuFiJi2MJFZgWz75R8n6', 'Pra Yoga', 'Wijaya', 'Baca Manga', 'pra.yoga@gmail.com', '2004-02-13', 'user', NULL, 'profile/default.png'),
 (5, 'ivan', '$2y$10$1uXmdhyxTexVu2Og.aAsFuHOuI8yFwYR6r3ytmSzHv24iiWM4rbrC', 'Ivandy', 'Wijaya', 'Turu', 'ivandy.wijaya@gmail.com', '2003-09-20', 'user', NULL, 'profile/bambang.jfif');
 
@@ -189,19 +191,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `likecomment`
 --
 ALTER TABLE `likecomment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `likepost`
 --
 ALTER TABLE `likepost`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `postingan`
